@@ -1,0 +1,17 @@
+{
+  "id": "instantmesh",
+  "name": "InstantMesh",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать InstantMesh",
+      "url": "https://github.com/TencentARC/InstantMesh"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

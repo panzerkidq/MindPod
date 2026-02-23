@@ -1,0 +1,17 @@
+{
+  "id": "fluxwebui",
+  "name": "Flux WebUI",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Flux WebUI",
+      "url": "https://github.com/pinokiofactory/flux-webui"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

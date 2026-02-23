@@ -1,0 +1,7 @@
+{
+  "id": "llamacpp",
+  "name": "llama.cpp",
+  "port": 8080,
+  "command": "build/bin/llama-server --port {port}",
+  "env": {}
+}

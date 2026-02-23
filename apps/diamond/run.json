@@ -1,0 +1,7 @@
+{
+  "id": "diamond",
+  "name": "Diamond",
+  "port": 7888,
+  "command": "{python} src/play.py --port {port}",
+  "env": {}
+}

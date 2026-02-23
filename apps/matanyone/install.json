@@ -1,0 +1,17 @@
+{
+  "id": "matanyone",
+  "name": "MatAnyone",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать MatAnyone",
+      "url": "https://github.com/pq-yang/MatAnyone"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

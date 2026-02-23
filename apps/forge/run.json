@@ -1,0 +1,7 @@
+{
+  "id": "forge",
+  "name": "SD WebUI Forge",
+  "port": 7861,
+  "command": "{python} launch.py --port {port} --api --listen 127.0.0.1",
+  "env": {}
+}

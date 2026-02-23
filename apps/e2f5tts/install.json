@@ -1,0 +1,17 @@
+{
+  "id": "e2f5tts",
+  "name": "E2 / F5 TTS",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать E2/F5 TTS",
+      "url": "https://github.com/SWivid/F5-TTS"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

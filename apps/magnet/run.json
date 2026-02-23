@@ -1,0 +1,7 @@
+{
+  "id": "magnet",
+  "name": "Magnet (AudioCraft)",
+  "port": 7908,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

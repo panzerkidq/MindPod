@@ -1,0 +1,17 @@
+{
+  "id": "rvc",
+  "name": "RVC",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать RVC",
+      "url": "https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

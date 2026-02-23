@@ -1,0 +1,7 @@
+{
+  "id": "lobe",
+  "name": "Lobe Chat",
+  "port": 3210,
+  "command": "npm start -- --port {port}",
+  "env": {}
+}

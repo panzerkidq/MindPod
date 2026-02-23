@@ -1,0 +1,17 @@
+{
+  "id": "omnigen",
+  "name": "OmniGen",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать OmniGen",
+      "url": "https://github.com/VectorSpaceLab/OmniGen"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

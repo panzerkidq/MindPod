@@ -1,0 +1,7 @@
+{
+  "id": "jan",
+  "name": "Jan",
+  "port": 1337,
+  "command": "jan --server --port {port}",
+  "env": {}
+}

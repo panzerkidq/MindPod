@@ -1,0 +1,7 @@
+{
+  "id": "vid2pose",
+  "name": "Vid2Pose",
+  "port": 7896,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

@@ -1,0 +1,7 @@
+{
+  "id": "magicquill",
+  "name": "MagicQuill",
+  "port": 7868,
+  "command": "{python} gradio_demo.py --port {port}",
+  "env": {}
+}

@@ -1,0 +1,7 @@
+{
+  "id": "trellis",
+  "name": "TRELLIS 3D",
+  "port": 7921,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

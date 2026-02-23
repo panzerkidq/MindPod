@@ -1,0 +1,17 @@
+{
+  "id": "openvoice",
+  "name": "OpenVoice",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать OpenVoice",
+      "url": "https://github.com/myshell-ai/OpenVoice"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

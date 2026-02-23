@@ -1,0 +1,17 @@
+{
+  "id": "openui",
+  "name": "OpenUI",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать OpenUI",
+      "url": "https://github.com/wandb/openui"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

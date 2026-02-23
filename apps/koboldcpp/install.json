@@ -1,0 +1,12 @@
+{
+  "id": "koboldcpp",
+  "name": "KoboldCpp",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "shell",
+      "name": "Скачать KoboldCpp",
+      "command": "curl -L https://github.com/LostRuins/koboldcpp/releases/latest/download/koboldcpp.exe -o koboldcpp.exe"
+    }
+  ]
+}

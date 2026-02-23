@@ -1,0 +1,17 @@
+{
+  "id": "controlnet",
+  "name": "ControlNet",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать ControlNet",
+      "url": "https://github.com/lllyasviel/ControlNet"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "superagi",
+  "name": "SuperAGI",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать SuperAGI",
+      "url": "https://github.com/TransformerOptimus/SuperAGI"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

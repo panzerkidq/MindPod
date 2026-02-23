@@ -1,0 +1,7 @@
+{
+  "id": "fluxwebui",
+  "name": "Flux WebUI",
+  "port": 7862,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

@@ -1,0 +1,7 @@
+{
+  "id": "diatts",
+  "name": "Dia TTS",
+  "port": 7903,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

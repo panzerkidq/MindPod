@@ -1,0 +1,7 @@
+{
+  "id": "cogstudio",
+  "name": "CogStudio",
+  "port": 7881,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

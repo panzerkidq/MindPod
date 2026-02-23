@@ -1,0 +1,7 @@
+{
+  "id": "yuemusic",
+  "name": "YuE Music",
+  "port": 7906,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

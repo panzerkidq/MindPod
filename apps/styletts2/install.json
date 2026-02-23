@@ -1,0 +1,17 @@
+{
+  "id": "styletts2",
+  "name": "StyleTTS 2",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать StyleTTS 2",
+      "url": "https://github.com/yl4579/StyleTTS2"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

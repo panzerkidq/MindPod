@@ -1,0 +1,17 @@
+{
+  "id": "mmaudio",
+  "name": "MMAudio",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать MMAudio",
+      "url": "https://github.com/hkchengrex/MMAudio"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

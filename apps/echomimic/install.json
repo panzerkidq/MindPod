@@ -1,0 +1,17 @@
+{
+  "id": "echomimic",
+  "name": "EchoMimic 2",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать EchoMimic 2",
+      "url": "https://github.com/antgroup/echomimic_v2"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

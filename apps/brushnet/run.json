@@ -1,0 +1,7 @@
+{
+  "id": "brushnet",
+  "name": "BrushNet",
+  "port": 7876,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

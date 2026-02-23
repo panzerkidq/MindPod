@@ -1,0 +1,7 @@
+{
+  "id": "applio",
+  "name": "Applio",
+  "port": 6969,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

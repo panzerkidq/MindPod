@@ -1,0 +1,22 @@
+{
+  "id": "magnet",
+  "name": "Magnet (AudioCraft)",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Magnet WebUI",
+      "url": "https://github.com/cocktailpeanutlabs/magnet"
+    },
+    {
+      "method": "pip",
+      "name": "Установить AudioCraft",
+      "packages": "audiocraft"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "lmstudio",
+  "name": "LM Studio",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "shell",
+      "name": "Скачать LM Studio",
+      "command": "curl -L https://releases.lmstudio.ai/windows/x64/latest/LM-Studio-Setup.exe -o LMStudio.exe"
+    },
+    {
+      "method": "shell",
+      "name": "Установить LM Studio",
+      "command": "LMStudio.exe /S"
+    }
+  ]
+}

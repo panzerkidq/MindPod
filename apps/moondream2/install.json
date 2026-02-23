@@ -1,0 +1,17 @@
+{
+  "id": "moondream2",
+  "name": "Moondream 2",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Moondream2",
+      "url": "https://github.com/vikhyat/moondream"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

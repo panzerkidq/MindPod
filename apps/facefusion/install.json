@@ -1,0 +1,17 @@
+{
+  "id": "facefusion",
+  "name": "FaceFusion",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать FaceFusion",
+      "url": "https://github.com/facefusion/facefusion"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

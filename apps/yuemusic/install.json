@@ -1,0 +1,17 @@
+{
+  "id": "yuemusic",
+  "name": "YuE Music",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать YuE",
+      "url": "https://github.com/multimodal-art-projection/YuE"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

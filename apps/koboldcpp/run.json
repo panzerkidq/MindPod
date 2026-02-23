@@ -1,0 +1,7 @@
+{
+  "id": "koboldcpp",
+  "name": "KoboldCpp",
+  "port": 5001,
+  "command": "koboldcpp.exe --port {port}",
+  "env": {}
+}

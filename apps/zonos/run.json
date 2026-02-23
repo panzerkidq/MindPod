@@ -1,0 +1,7 @@
+{
+  "id": "zonos",
+  "name": "Zonos TTS",
+  "port": 7904,
+  "command": "{python} gradio_interface.py --port {port}",
+  "env": {}
+}

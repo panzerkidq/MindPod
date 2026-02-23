@@ -1,0 +1,9 @@
+{
+  "id": "invokeai",
+  "name": "InvokeAI",
+  "port": 9090,
+  "command": "{python} -m invokeai.app.run_app --port {port} --host 127.0.0.1",
+  "env": {
+    "INVOKEAI_ROOT": "{home}"
+  }
+}

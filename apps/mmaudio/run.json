@@ -1,0 +1,7 @@
+{
+  "id": "mmaudio",
+  "name": "MMAudio",
+  "port": 7887,
+  "command": "{python} demo.py --port {port}",
+  "env": {}
+}

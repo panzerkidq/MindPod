@@ -1,0 +1,17 @@
+{
+  "id": "llamacpp",
+  "name": "llama.cpp",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать llama.cpp",
+      "url": "https://github.com/ggerganov/llama.cpp"
+    },
+    {
+      "method": "shell",
+      "name": "Сборка (Windows)",
+      "command": "cmake -B build && cmake --build build --config Release"
+    }
+  ]
+}

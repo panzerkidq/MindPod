@@ -1,0 +1,7 @@
+{
+  "id": "fooocus",
+  "name": "Fooocus",
+  "port": 7865,
+  "command": "{python} entry_with_update.py --port {port} --listen 127.0.0.1",
+  "env": {}
+}

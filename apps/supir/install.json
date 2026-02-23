@@ -1,0 +1,17 @@
+{
+  "id": "supir",
+  "name": "SUPIR",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать SUPIR",
+      "url": "https://github.com/Fanghua-Yu/SUPIR"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

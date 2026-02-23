@@ -1,0 +1,7 @@
+{
+  "id": "styletts2",
+  "name": "StyleTTS 2",
+  "port": 7909,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

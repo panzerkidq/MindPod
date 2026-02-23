@@ -1,0 +1,7 @@
+{
+  "id": "hunyuan3d",
+  "name": "Hunyuan3D-2 (Low VRAM)",
+  "port": 7920,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

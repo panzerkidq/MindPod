@@ -1,0 +1,17 @@
+{
+  "id": "fooocus",
+  "name": "Fooocus",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Fooocus",
+      "url": "https://github.com/lllyasviel/Fooocus"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements_versions.txt"
+    }
+  ]
+}

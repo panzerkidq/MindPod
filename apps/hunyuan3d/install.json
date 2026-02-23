@@ -1,0 +1,17 @@
+{
+  "id": "hunyuan3d",
+  "name": "Hunyuan3D-2 (Low VRAM)",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Hunyuan3D-2",
+      "url": "https://github.com/pinokiofactory/Hunyuan3d-2-lowvram"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

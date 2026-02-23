@@ -1,0 +1,17 @@
+{
+  "id": "rmbg2",
+  "name": "RMBG-2 Studio",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать RMBG-2",
+      "url": "https://github.com/pinokiofactory/RMBG-2-Studio"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

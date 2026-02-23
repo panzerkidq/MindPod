@@ -1,0 +1,7 @@
+{
+  "id": "streamdiffusion",
+  "name": "StreamDiffusion",
+  "port": 7875,
+  "command": "{python} demo/realtime-img2img/main.py",
+  "env": {}
+}

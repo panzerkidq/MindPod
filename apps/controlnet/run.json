@@ -1,0 +1,7 @@
+{
+  "id": "controlnet",
+  "name": "ControlNet",
+  "port": 7866,
+  "command": "{python} gradio_depth2image.py --port {port}",
+  "env": {}
+}

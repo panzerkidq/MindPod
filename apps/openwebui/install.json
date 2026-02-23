@@ -1,0 +1,12 @@
+{
+  "id": "openwebui",
+  "name": "Open WebUI",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "pip",
+      "name": "Установить Open WebUI",
+      "packages": "open-webui"
+    }
+  ]
+}

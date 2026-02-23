@@ -1,0 +1,17 @@
+{
+  "id": "zonos",
+  "name": "Zonos TTS",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Zonos",
+      "url": "https://github.com/Zyphra/Zonos"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

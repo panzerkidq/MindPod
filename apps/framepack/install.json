@@ -1,0 +1,17 @@
+{
+  "id": "framepack",
+  "name": "FramePack",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать FramePack",
+      "url": "https://github.com/lllyasviel/FramePack"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

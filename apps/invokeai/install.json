@@ -1,0 +1,17 @@
+{
+  "id": "invokeai",
+  "name": "InvokeAI",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "pip",
+      "name": "Установить InvokeAI",
+      "packages": "InvokeAI"
+    },
+    {
+      "method": "shell",
+      "name": "Инициализировать",
+      "command": "{python} -m invokeai.frontend.install.invokeai_configure --yes"
+    }
+  ]
+}

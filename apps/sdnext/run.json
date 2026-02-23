@@ -1,0 +1,7 @@
+{
+  "id": "sdnext",
+  "name": "SD.Next",
+  "port": 7860,
+  "command": "{python} launch.py --port {port} --api --listen",
+  "env": {}
+}

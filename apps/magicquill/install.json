@@ -1,0 +1,17 @@
+{
+  "id": "magicquill",
+  "name": "MagicQuill",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать MagicQuill",
+      "url": "https://github.com/magic-quill/MagicQuill"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

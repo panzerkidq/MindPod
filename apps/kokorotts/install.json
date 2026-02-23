@@ -1,0 +1,22 @@
+{
+  "id": "kokorotts",
+  "name": "Kokoro TTS",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Kokoro TTS",
+      "url": "https://github.com/pinokiofactory/Kokoro-TTS"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    },
+    {
+      "method": "shell",
+      "name": "Скачать модели",
+      "command": "{python} download_models.py"
+    }
+  ]
+}

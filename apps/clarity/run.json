@@ -1,0 +1,7 @@
+{
+  "id": "clarity",
+  "name": "Clarity Refiners UI",
+  "port": 7869,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

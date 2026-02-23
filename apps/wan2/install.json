@@ -1,0 +1,22 @@
+{
+  "id": "wan2",
+  "name": "WAN 2.1",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать WAN 2.1",
+      "url": "https://github.com/Wan-Video/Wan2.1"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    },
+    {
+      "method": "shell",
+      "name": "Скачать модель WAN T2V",
+      "command": "huggingface-cli download Wan-AI/Wan2.1-T2V-14B --local-dir {home}/models/Wan2.1-T2V-14B"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "facepoke",
+  "name": "FacePoke",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать FacePoke",
+      "url": "https://github.com/jbilcke-hf/FacePoke"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

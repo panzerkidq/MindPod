@@ -1,0 +1,7 @@
+{
+  "id": "wan2",
+  "name": "WAN 2.1",
+  "port": 7880,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

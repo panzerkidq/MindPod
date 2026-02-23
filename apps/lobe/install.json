@@ -1,0 +1,17 @@
+{
+  "id": "lobe",
+  "name": "Lobe Chat",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Lobe Chat",
+      "url": "https://github.com/lobehub/lobe-chat"
+    },
+    {
+      "method": "npm",
+      "name": "Установить зависимости",
+      "command": "npm install"
+    }
+  ]
+}

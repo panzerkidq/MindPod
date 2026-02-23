@@ -1,0 +1,17 @@
+{
+  "id": "applio",
+  "name": "Applio",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Applio",
+      "url": "https://github.com/IAHispano/Applio"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

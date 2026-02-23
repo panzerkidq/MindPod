@@ -1,0 +1,7 @@
+{
+  "id": "textgen",
+  "name": "Text Generation WebUI",
+  "port": 7860,
+  "command": "{python} server.py --port {port} --api --listen",
+  "env": {}
+}

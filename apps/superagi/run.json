@@ -1,0 +1,7 @@
+{
+  "id": "superagi",
+  "name": "SuperAGI",
+  "port": 3000,
+  "command": "{python} run.py",
+  "env": {}
+}

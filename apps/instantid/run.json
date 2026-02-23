@@ -1,0 +1,7 @@
+{
+  "id": "instantid",
+  "name": "InstantID",
+  "port": 7871,
+  "command": "{python} gradio_demo/app.py --port {port}",
+  "env": {}
+}

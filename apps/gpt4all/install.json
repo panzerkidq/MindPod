@@ -1,0 +1,17 @@
+{
+  "id": "gpt4all",
+  "name": "GPT4All",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "shell",
+      "name": "Скачать GPT4All",
+      "command": "curl -L https://gpt4all.io/installers/gpt4all-installer-win64.exe -o gpt4all.exe"
+    },
+    {
+      "method": "shell",
+      "name": "Установить GPT4All",
+      "command": "gpt4all.exe /S"
+    }
+  ]
+}

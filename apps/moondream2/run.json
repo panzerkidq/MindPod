@@ -1,0 +1,7 @@
+{
+  "id": "moondream2",
+  "name": "Moondream 2",
+  "port": 7930,
+  "command": "{python} gradio_demo.py --port {port}",
+  "env": {}
+}

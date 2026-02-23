@@ -1,0 +1,17 @@
+{
+  "id": "vid2pose",
+  "name": "Vid2Pose",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Vid2Pose",
+      "url": "https://github.com/cocktailpeanutlabs/vid2pose"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

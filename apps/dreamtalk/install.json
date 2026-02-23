@@ -1,0 +1,17 @@
+{
+  "id": "dreamtalk",
+  "name": "DreamTalk",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать DreamTalk",
+      "url": "https://github.com/ali-vilab/dreamtalk"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

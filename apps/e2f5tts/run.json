@@ -1,0 +1,7 @@
+{
+  "id": "e2f5tts",
+  "name": "E2 / F5 TTS",
+  "port": 7901,
+  "command": "{python} src/f5_tts/infer/infer_gradio.py --port {port}",
+  "env": {}
+}

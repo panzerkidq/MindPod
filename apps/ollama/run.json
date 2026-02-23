@@ -1,0 +1,10 @@
+{
+  "id": "ollama",
+  "name": "Ollama",
+  "port": 11434,
+  "command": "ollama serve",
+  "env": {
+    "OLLAMA_HOST": "127.0.0.1:{port}",
+    "OLLAMA_ORIGINS": "*"
+  }
+}

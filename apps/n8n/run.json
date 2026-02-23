@@ -1,0 +1,9 @@
+{
+  "id": "n8n",
+  "name": "n8n",
+  "port": 5678,
+  "command": "n8n start --port {port}",
+  "env": {
+    "N8N_USER_FOLDER": "{home}"
+  }
+}

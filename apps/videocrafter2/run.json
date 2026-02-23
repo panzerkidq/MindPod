@@ -1,0 +1,7 @@
+{
+  "id": "videocrafter2",
+  "name": "VideoCrafter2",
+  "port": 7889,
+  "command": "{python} scripts/gradio/gradio_t2v.py --port {port}",
+  "env": {}
+}

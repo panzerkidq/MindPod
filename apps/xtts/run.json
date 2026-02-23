@@ -1,0 +1,7 @@
+{
+  "id": "xtts",
+  "name": "XTTS (Coqui TTS)",
+  "port": 8020,
+  "command": "npm start -- --port {port}",
+  "env": {}
+}

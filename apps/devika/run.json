@@ -1,0 +1,7 @@
+{
+  "id": "devika",
+  "name": "Devika",
+  "port": 1337,
+  "command": "{python} devika.py --port {port}",
+  "env": {}
+}

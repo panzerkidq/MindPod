@@ -1,0 +1,17 @@
+{
+  "id": "instantid",
+  "name": "InstantID",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать InstantID",
+      "url": "https://github.com/InstantID/InstantID"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

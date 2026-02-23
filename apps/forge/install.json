@@ -1,0 +1,17 @@
+{
+  "id": "forge",
+  "name": "SD WebUI Forge",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Forge",
+      "url": "https://github.com/lllyasviel/stable-diffusion-webui-forge"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements_versions.txt"
+    }
+  ]
+}

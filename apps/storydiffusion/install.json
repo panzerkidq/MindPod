@@ -1,0 +1,17 @@
+{
+  "id": "storydiffusion",
+  "name": "StoryDiffusion Comics",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать StoryDiffusion",
+      "url": "https://github.com/HVision-NKU/StoryDiffusion"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

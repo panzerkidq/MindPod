@@ -1,0 +1,7 @@
+{
+  "id": "lmstudio",
+  "name": "LM Studio",
+  "port": 1234,
+  "command": "lms server start --port {port}",
+  "env": {}
+}

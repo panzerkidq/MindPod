@@ -1,0 +1,9 @@
+{
+  "id": "openwebui",
+  "name": "Open WebUI",
+  "port": 3000,
+  "command": "{python} -m open_webui serve --port {port}",
+  "env": {
+    "DATA_DIR": "{home}"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "diatts",
+  "name": "Dia TTS",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Dia TTS",
+      "url": "https://github.com/nari-labs/dia"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

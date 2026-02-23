@@ -1,0 +1,7 @@
+{
+  "id": "svd",
+  "name": "Stable Video Diffusion",
+  "port": 7886,
+  "command": "streamlit run scripts/demo/video_sampling.py",
+  "env": {}
+}

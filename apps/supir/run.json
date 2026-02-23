@@ -1,0 +1,7 @@
+{
+  "id": "supir",
+  "name": "SUPIR",
+  "port": 7870,
+  "command": "{python} SUPIR_UI.py --port {port}",
+  "env": {}
+}

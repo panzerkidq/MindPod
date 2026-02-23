@@ -1,0 +1,17 @@
+{
+  "id": "acestep",
+  "name": "ACE-Step Music",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать ACE-Step",
+      "url": "https://github.com/ace-step/ACE-Step"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

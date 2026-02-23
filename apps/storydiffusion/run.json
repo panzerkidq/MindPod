@@ -1,0 +1,7 @@
+{
+  "id": "storydiffusion",
+  "name": "StoryDiffusion Comics",
+  "port": 7877,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

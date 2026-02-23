@@ -1,0 +1,17 @@
+{
+  "id": "streamdiffusion",
+  "name": "StreamDiffusion",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать StreamDiffusion",
+      "url": "https://github.com/cumulo-autumn/StreamDiffusion"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements/requirements-cuda.txt"
+    }
+  ]
+}

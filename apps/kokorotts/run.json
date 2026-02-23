@@ -1,0 +1,7 @@
+{
+  "id": "kokorotts",
+  "name": "Kokoro TTS",
+  "port": 7900,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

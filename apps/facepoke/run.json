@@ -1,0 +1,7 @@
+{
+  "id": "facepoke",
+  "name": "FacePoke",
+  "port": 7885,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

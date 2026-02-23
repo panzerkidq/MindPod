@@ -1,0 +1,7 @@
+{
+  "id": "a1111",
+  "name": "Automatic 1111",
+  "port": 7860,
+  "command": "{python} launch.py --port {port} --api --listen 127.0.0.1 --skip-torch-cuda-test",
+  "env": {}
+}

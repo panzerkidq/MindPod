@@ -1,0 +1,7 @@
+{
+  "id": "dreamtalk",
+  "name": "DreamTalk",
+  "port": 7891,
+  "command": "{python} gradio_demo.py --port {port}",
+  "env": {}
+}

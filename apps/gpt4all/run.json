@@ -1,0 +1,7 @@
+{
+  "id": "gpt4all",
+  "name": "GPT4All",
+  "port": 4891,
+  "command": "gpt4all api --port {port}",
+  "env": {}
+}

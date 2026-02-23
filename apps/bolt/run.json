@@ -1,0 +1,7 @@
+{
+  "id": "bolt",
+  "name": "Bolt.diy",
+  "port": 5173,
+  "command": "npm run dev -- --port {port}",
+  "env": {}
+}

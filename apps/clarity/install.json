@@ -1,0 +1,17 @@
+{
+  "id": "clarity",
+  "name": "Clarity Refiners UI",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Clarity",
+      "url": "https://github.com/pinokiofactory/clarity-refiners-ui"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

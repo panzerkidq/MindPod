@@ -1,0 +1,7 @@
+{
+  "id": "animateanyone",
+  "name": "Animate Anyone",
+  "port": 7897,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

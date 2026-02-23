@@ -1,0 +1,7 @@
+{
+  "id": "echomimic",
+  "name": "EchoMimic 2",
+  "port": 7884,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

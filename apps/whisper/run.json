@@ -1,0 +1,7 @@
+{
+  "id": "whisper",
+  "name": "Whisper WebUI",
+  "port": 7898,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

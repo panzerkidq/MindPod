@@ -1,0 +1,7 @@
+{
+  "id": "comfyui",
+  "name": "ComfyUI",
+  "port": 8188,
+  "command": "{python} main.py --port {port} --listen 127.0.0.1",
+  "env": {}
+}

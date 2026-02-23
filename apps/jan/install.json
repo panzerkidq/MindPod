@@ -1,0 +1,17 @@
+{
+  "id": "jan",
+  "name": "Jan",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "shell",
+      "name": "Скачать Jan",
+      "command": "curl -L https://github.com/janhq/jan/releases/latest/download/jan-win-x64.exe -o jan.exe"
+    },
+    {
+      "method": "shell",
+      "name": "Установить Jan",
+      "command": "jan.exe /S"
+    }
+  ]
+}

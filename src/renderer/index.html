@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MindPod</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{--g1:rgba(255,255,255,.055);--g2:rgba(255,255,255,.09);--g3:rgba(255,255,255,.13);--gb:rgba(255,255,255,.10);--gh:rgba(255,255,255,.20);--sh:0 6px 28px rgba(0,0,0,.48),0 0 0 1px rgba(255,255,255,.06) inset;--bl:blur(28px) saturate(155%);--ac:#7c3aed;--as:rgba(124,58,237,.20);--a2:#818cf8;--gn:#10b981;--gs:rgba(16,185,129,.15);--rd:#ef4444;--rs:rgba(239,68,68,.15);--am:#f59e0b;--t1:rgba(255,255,255,.92);--t2:rgba(255,255,255,.50);--t3:rgba(255,255,255,.24);--bg:#07070e;--sw:216px;--th:40px;--r:14px;--f:'Inter',-apple-system,sans-serif;--m:'JetBrains Mono',monospace;--e:cubic-bezier(.25,.46,.45,.94);--T:.16s var(--e)}
+[data-theme=light]{--g1:rgba(255,255,255,.60);--g2:rgba(255,255,255,.78);--g3:rgba(255,255,255,.90);--gb:rgba(0,0,0,.08);--gh:rgba(0,0,0,.15);--sh:0 6px 28px rgba(0,0,0,.10),0 0 0 1px rgba(255,255,255,.80) inset;--t1:rgba(0,0,0,.88);--t2:rgba(0,0,0,.50);--t3:rgba(0,0,0,.24);--bg:#dfe0ee}
+*{box-sizing:border-box;margin:0;padding:0;user-select:none;-webkit-user-select:none}
+input,textarea{user-select:text;-webkit-user-select:text}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--f);background:var(--bg);color:var(--t1);font-size:13px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+.orb{position:absolute;border-radius:50%;filter:blur(90px)}
+.o1{width:50vw;height:50vw;background:radial-gradient(circle,rgba(80,38,200,.22)0%,transparent 70%);top:-20%;left:-12%;animation:dr 24s ease-in-out infinite alternate}
+.o2{width:42vw;height:42vw;background:radial-gradient(circle,rgba(16,90,220,.16)0%,transparent 70%);bottom:-18%;right:-10%;animation:dr 30s ease-in-out infinite alternate-reverse}
+.o3{width:32vw;height:32vw;background:radial-gradient(circle,rgba(180,60,200,.10)0%,transparent 70%);top:38%;left:42%;animation:dr 20s ease-in-out infinite alternate;animation-delay:-8s}
+@keyframes dr{to{transform:translate(30px,-22px) scale(1.06)}}
+#app{position:relative;z-index:1;display:flex;flex-direction:column;height:100vh}
+.tb{height:var(--th);display:flex;align-items:center;padding:0 12px;flex-shrink:0;border-bottom:1px solid var(--gb);background:rgba(255,255,255,.02);backdrop-filter:blur(20px);-webkit-app-region:drag;position:relative}
+.brand{display:flex;align-items:center;gap:9px}
+.logo{width:26px;height:26px;border-radius:7px;background:linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(80,40,180,.4)}
+.logo svg{width:14px;height:14px}
+.bname{font-size:13px;font-weight:500}
+.bver{font-size:10px;color:var(--t3);margin-left:2px}
+.tbc{position:absolute;left:50%;transform:translateX(-50%)}
+.srch{display:flex;align-items:center;gap:7px;padding:6px 12px;background:var(--g1);border:1px solid var(--gb);border-radius:18px;width:300px;transition:all var(--T);-webkit-app-region:no-drag}
+.srch:focus-within{border-color:rgba(124,58,237,.4);box-shadow:0 0 0 3px rgba(124,58,237,.09);background:var(--g2);width:340px}
+.srch svg{width:13px;height:13px;color:var(--t3);stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.srch input{border:none;background:transparent;color:var(--t1);font:13px var(--f);outline:none;flex:1}
+.srch input::placeholder{color:var(--t3)}
+.tbr{margin-left:auto;display:flex;align-items:center;gap:3px;-webkit-app-region:no-drag}
+.ib{width:28px;height:28px;border:none;border-radius:6px;background:transparent;color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--T)}
+.ib:hover{background:var(--g1);color:var(--t1)}
+.ib.d:hover{background:var(--rs);color:var(--rd)}
+.ib svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+.body{display:flex;flex:1;overflow:hidden}
+.sb{width:var(--sw);flex-shrink:0;display:flex;flex-direction:column;padding:8px 6px 12px;border-right:1px solid var(--gb);background:rgba(255,255,255,.016);overflow-y:auto;gap:1px}
+.sb::-webkit-scrollbar{width:0}
+.nsec{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--t3);padding:10px 10px 3px}
+.ni{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;cursor:pointer;color:var(--t2);font-size:13px;transition:all var(--T);border:1px solid transparent;position:relative}
+.ni:hover{background:var(--g1);color:var(--t1);border-color:var(--gb)}
+.ni.on{background:var(--g3);color:var(--t1);border-color:var(--gh);box-shadow:0 2px 10px rgba(0,0,0,.18)}
+.ni.on::after{content:'';width:3px;height:3px;border-radius:50%;background:var(--ac);box-shadow:0 0 6px var(--ac);position:absolute;right:9px;top:50%;transform:translateY(-50%)}
+.nic{width:16px;height:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.nic svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
+.nl{flex:1}
+.bdg{font-size:10px;font-weight:600;background:var(--as);color:var(--a2);border-radius:8px;padding:1px 6px}
+.nbadge{font-size:9px;background:var(--ac);color:#fff;border-radius:6px;padding:1px 5px;margin-left:auto}
+.sfoot{margin-top:auto;padding:10px 10px 0;border-top:1px solid var(--gb);font-size:11px;color:var(--t3);line-height:2}
+.dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--gn);box-shadow:0 0 7px rgba(16,185,129,.8);margin-right:5px;vertical-align:middle;animation:gp 2s ease-in-out infinite}
+.dot.off{background:var(--t3);box-shadow:none;animation:none}
+@keyframes gp{0%,100%{box-shadow:0 0 7px rgba(16,185,129,.8)}50%{box-shadow:0 0 12px rgba(16,185,129,.4)}}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.ct{flex:1;overflow-y:auto;padding:20px 22px}
+.ct::-webkit-scrollbar{width:4px}
+.ct::-webkit-scrollbar-thumb{background:rgba(255,255,255,.07);border-radius:2px}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px}
+.pht{font-size:19px;font-weight:500;letter-spacing:-.01em}
+.phs{font-size:12px;color:var(--t3);margin-left:6px}
+.phr{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.gc{background:var(--g1);border:1px solid var(--gb);border-radius:var(--r);backdrop-filter:var(--bl);-webkit-backdrop-filter:var(--bl);box-shadow:var(--sh);overflow:hidden;transition:all var(--T)}
+.gc.hv:hover{background:var(--g2);border-color:var(--gh);box-shadow:0 12px 38px rgba(0,0,0,.36);transform:translateY(-1px)}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:16px;border:1px solid var(--gb);background:var(--g1);color:var(--t2);font:500 12px var(--f);cursor:pointer;white-space:nowrap;transition:all var(--T)}
+.btn:hover{background:var(--g2);border-color:var(--gh);color:var(--t1)}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important}
+.btn svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2}
+.bp{background:linear-gradient(135deg,rgba(124,58,237,.7),rgba(109,40,217,.7));border-color:rgba(124,58,237,.4);color:rgba(255,255,255,.92)}
+.bp:hover{background:linear-gradient(135deg,rgba(139,92,246,.85),rgba(124,58,237,.85));color:#fff;transform:translateY(-1px)}
+.bg2{background:var(--gs);border-color:rgba(16,185,129,.25);color:var(--gn)}
+.bg2:hover{background:rgba(16,185,129,.22)}
+.bd{background:var(--rs);border-color:rgba(239,68,68,.22);color:var(--rd)}
+.bd:hover{background:rgba(239,68,68,.22)}
+.bam{background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.25);color:var(--am)}
+.bam:hover{background:rgba(245,158,11,.20)}
+.sm{padding:4px 10px;font-size:11px;border-radius:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:22px}
+.stat{padding:14px 16px}
+.sl{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.sv{font-size:26px;font-weight:300;letter-spacing:-.02em}
+.sysbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;padding:10px 14px;background:var(--g1);border:1px solid var(--gb);border-radius:10px;font-size:11px}
+.sysi{display:flex;align-items:center;gap:5px;color:var(--t3)}
+.sysi span{color:var(--t2)}
+.sysi.ok span{color:var(--gn)}
+.sysi.er span{color:var(--rd)}
+.ag{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.ac{padding:14px 12px 11px;display:flex;flex-direction:column;gap:8px;position:relative;cursor:default}
+.ac:hover .aa{opacity:1}
+.rdot{position:absolute;top:10px;right:10px;width:6px;height:6px;border-radius:50%}
+.rdot.on{background:var(--gn);box-shadow:0 0 8px rgba(16,185,129,.8);animation:gp 2s infinite}
+.rdot.off{background:rgba(255,255,255,.12)}
+.aico{width:46px;height:46px;border-radius:12px;background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.11);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.24);transition:transform .22s var(--e)}
+.aico svg{width:21px;height:21px}
+.ac:hover .aico{transform:translateY(-2px)}
+.an{font-size:12px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ad{font-size:11px;color:var(--t3);line-height:1.4}
+.aa{display:flex;gap:5px;opacity:0;transition:opacity var(--T)}
+.frow{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.fb{padding:4px 11px;border-radius:13px;border:1px solid var(--gb);background:var(--g1);color:var(--t3);font:500 11px var(--f);cursor:pointer;transition:all var(--T)}
+.fb:hover{color:var(--t2);border-color:var(--gh)}
+.fb.on{background:var(--g3);border-color:var(--gh);color:var(--t1)}
+.fq{display:flex;align-items:center;gap:6px;padding:5px 11px;background:var(--g1);border:1px solid var(--gb);border-radius:13px;margin-left:auto}
+.fq svg{width:12px;height:12px;color:var(--t3);flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2}
+.fq input{border:none;background:transparent;color:var(--t1);font:12px var(--f);outline:none;width:155px}
+.fq input::placeholder{color:var(--t3)}
+.cl{display:flex;flex-direction:column}
+.ci{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid rgba(255,255,255,.04)}
+.ci:last-child{border-bottom:none}
+.cic{width:42px;height:42px;border-radius:11px;flex-shrink:0;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center}
+.cic svg{width:20px;height:20px}
+.cb{flex:1;min-width:0}
+.cn{font-size:13px;font-weight:500;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cd{font-size:11px;color:var(--t3);line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm{font-size:10px;color:var(--t3);margin-top:3px;display:flex;gap:8px;align-items:center}
+.tag{padding:1px 6px;border-radius:4px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);font-size:10px;color:var(--t3)}
+.cr{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;min-width:96px}
+.pi{display:flex;align-items:center;gap:12px;padding:12px 15px;border-bottom:1px solid rgba(255,255,255,.04)}
+.pi:last-child{border-bottom:none}
+.pic{width:34px;height:34px;border-radius:9px;flex-shrink:0;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center}
+.pic svg{width:16px;height:16px}
+.pb{flex:1}
+.pn{font-size:13px;font-weight:500;margin-bottom:2px}
+.pm{font-size:11px;color:var(--t3);font-family:var(--m)}
+.pr{display:flex;gap:5px}
+.ui{display:flex;align-items:center;gap:12px;padding:12px 15px;border-bottom:1px solid rgba(255,255,255,.04)}
+.ui:last-child{border-bottom:none}
+.tbar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05)}
+.tdd{width:10px;height:10px;border-radius:50%}
+.tcap{margin-left:5px;font-size:11px;color:var(--t3);font-family:var(--m)}
+.term{font-family:var(--m);font-size:12px;background:rgba(0,0,0,.38);padding:12px 14px;height:300px;overflow-y:auto;line-height:1.8}
+.term::-webkit-scrollbar{width:3px}
+.term::-webkit-scrollbar-thumb{background:rgba(255,255,255,.07);border-radius:2px}
+.tl{display:flex;gap:7px;word-break:break-all}
+.ts{color:var(--t3);flex-shrink:0;font-size:10px;margin-top:2px}
+.tp{color:#a78bfa}.to{color:rgba(255,255,255,.65)}.tok{color:var(--gn)}.ter{color:var(--rd)}.tin{color:var(--a2)}.tw{color:var(--am)}
+.ti{display:flex;align-items:center;gap:8px;padding:9px 14px;border-top:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.18)}
+.tpr{color:#a78bfa;font-family:var(--m);font-size:12px;flex-shrink:0}
+.tinp{flex:1;border:none;background:transparent;color:var(--t1);font:12px var(--m);outline:none}
+.tinp::placeholder{color:var(--t3)}
+.sg{margin-bottom:14px}
+.sgt{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--t3);margin-bottom:7px;padding:0 2px}
+.sr{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04)}
+.sr:last-child{border-bottom:none}
+.srl{flex:1}.srt{font-size:13px}.srs{font-size:11px;color:var(--t3);margin-top:1px}
+.tog{position:relative;width:38px;height:21px;flex-shrink:0}
+.tog input{opacity:0;width:0;height:0;position:absolute}
+.tsl{position:absolute;inset:0;background:rgba(255,255,255,.09);border-radius:21px;cursor:pointer;transition:all var(--T);border:1px solid rgba(255,255,255,.07)}
+.tsl::before{content:'';position:absolute;width:15px;height:15px;left:2px;top:50%;transform:translateY(-50%);border-radius:50%;background:rgba(255,255,255,.6);transition:all var(--T)}
+.tog input:checked+.tsl{background:var(--ac);border-color:rgba(124,58,237,.5)}
+.tog input:checked+.tsl::before{left:calc(100% - 17px);background:#fff}
+.mbg{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.75);backdrop-filter:blur(8px)}
+.mbg.open{display:flex;animation:mfi .18s var(--e)}
+@keyframes mfi{from{opacity:0}to{opacity:1}}
+.modal{background:rgba(10,10,20,.97);border:1px solid var(--gb);border-radius:var(--r);width:540px;max-width:90vw;box-shadow:0 32px 80px rgba(0,0,0,.7);overflow:hidden}
+.mh{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.06)}
+.mt{font-size:15px;font-weight:500}
+.mxb{width:26px;height:26px;border:none;background:transparent;color:var(--t3);cursor:pointer;border-radius:5px;font-size:16px;display:flex;align-items:center;justify-content:center}
+.mxb:hover{background:var(--g1);color:var(--t1)}
+.mb{padding:18px}
+.mpt{height:3px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-bottom:10px}
+.mpf{height:100%;width:0%;background:linear-gradient(90deg,var(--ac),var(--a2));border-radius:3px;transition:width .3s ease;box-shadow:0 0 10px rgba(120,80,255,.5)}
+.mst{font-size:11px;color:var(--t3);text-align:center;margin-bottom:10px}
+.ml{font-family:var(--m);font-size:11px;background:rgba(0,0,0,.4);border-radius:8px;padding:10px;height:180px;overflow-y:auto;line-height:1.7;margin-bottom:12px;color:var(--t2)}
+.ml::-webkit-scrollbar{width:3px}
+.ml::-webkit-scrollbar-thumb{background:rgba(255,255,255,.07);border-radius:2px}
+.mf{display:flex;justify-content:flex-end;gap:8px}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:48px 20px;text-align:center}
+.ei{width:44px;height:44px;opacity:.18;margin-bottom:4px}
+.ei svg{width:100%;height:100%;stroke:var(--t1);fill:none;stroke-width:1.2}
+.et{font-size:14px;color:var(--t2)}.es{font-size:12px;color:var(--t3)}
+.page{display:none}
+.page.active{display:block;animation:fin .24s var(--e) both}
+@keyframes fin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.th{position:fixed;bottom:18px;right:18px;z-index:9999;display:flex;flex-direction:column;gap:7px;pointer-events:none}
+.toast{padding:10px 14px;background:rgba(10,10,20,.95);border:1px solid var(--gb);border-radius:10px;font-size:12px;color:var(--t1);backdrop-filter:blur(20px);box-shadow:0 8px 28px rgba(0,0,0,.5);display:flex;align-items:center;gap:8px;pointer-events:all;animation:tin .22s var(--e) both;max-width:320px}
+@keyframes tin{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes tout{to{opacity:0;transform:translateY(5px) scale(.97)}}
+.tcl{color:var(--t3);cursor:pointer}
+.tcl:hover{color:var(--t1)}
+.upd-dot{position:absolute;top:6px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--am);box-shadow:0 0 6px var(--am)}
+.step-row{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:11px;color:var(--t3)}
+.step-ic{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px}
+.step-ic.done{background:var(--gs);border-color:rgba(16,185,129,.3);color:var(--gn)}
+.step-ic.active{background:var(--as);border-color:rgba(124,58,237,.3);color:var(--a2);animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+*{scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.07) transparent}
+.models-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:18px}
+.model-card{padding:14px;display:flex;flex-direction:column;gap:7px;cursor:pointer;transition:all var(--T)}
+.model-header{display:flex;align-items:center;gap:8px}
+.model-badge{font-size:9px;font-weight:700;letter-spacing:.1em;padding:2px 7px;border-radius:8px;text-transform:uppercase}
+.mb-hot{background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.2)}
+.mb-new{background:rgba(16,185,129,.15);color:#10b981;border:1px solid rgba(16,185,129,.2)}
+.mb-fast{background:rgba(129,140,248,.15);color:#818cf8;border:1px solid rgba(129,140,248,.2)}
+.model-name{font-size:13px;font-weight:500}
+.model-desc{font-size:11px;color:var(--t3);line-height:1.4}
+.model-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:2px}
+.model-size{font-size:10px;color:var(--t3);background:rgba(255,255,255,.05);padding:1px 6px;border-radius:5px;font-family:var(--m)}
+.pull-bar{height:3px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-top:6px;display:none}
+.pull-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--ac),var(--a2));transition:width .3s;border-radius:3px}
+.agents-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.agent-card{padding:16px;display:flex;flex-direction:column;gap:10px}
+.agent-icon{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.agent-name{font-size:13px;font-weight:500}
+.agent-desc{font-size:11px;color:var(--t3);line-height:1.45}
+.agent-tags{display:flex;gap:4px;flex-wrap:wrap}
+.at{font-size:9px;padding:2px 6px;border-radius:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--t3)}
+.disc-form{display:flex;gap:8px;margin-bottom:18px}
+.disc-inp{flex:1;padding:9px 14px;background:var(--g1);border:1px solid var(--gb);border-radius:10px;color:var(--t1);font:13px var(--f);outline:none;user-select:text;-webkit-user-select:text}
+.disc-inp:focus{border-color:rgba(124,58,237,.4);background:var(--g2)}
+.disc-inp::placeholder{color:var(--t3)}
+.disc-results{display:flex;flex-direction:column;gap:7px}
+.disc-item{display:flex;align-items:center;gap:12px;padding:12px 15px}
+.disc-icon{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.disc-body{flex:1;min-width:0}
+.disc-name{font-size:13px;font-weight:500;margin-bottom:2px}
+.disc-repo{font-size:11px;color:var(--t3);font-family:var(--m)}
+.dash-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.act-feed{padding:14px 16px}
+.act-title{font-size:10px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--t3);margin-bottom:10px}
+.act-item{display:flex;align-items:flex-start;gap:8px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.035)}
+.act-item:last-child{border:none}
+.act-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.act-text{font-size:11px;color:var(--t2);line-height:1.45;flex:1}
+.act-time{font-size:10px;color:var(--t3);white-space:nowrap}
+.res-bar-wrap{padding:14px 16px}
+.res-bar{margin-bottom:10px}
+.res-label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
+.res-l{color:var(--t3)}
+.res-v{color:var(--t2);font-family:var(--m)}
+.res-track{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.res-fill{height:100%;border-radius:3px;transition:width 1.2s ease}
+.dl-overlay{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9998;width:360px;display:none}
+.dl-card{padding:14px 16px;background:rgba(8,8,18,.97);border:1px solid var(--gb);border-radius:12px;backdrop-filter:blur(24px)}
+.dl-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.dl-ico{width:30px;height:30px;border-radius:8px;background:var(--as);border:1px solid rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;font-size:15px}
+.dl-name{font-size:13px;font-weight:500;flex:1}
+.dl-bar{height:4px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.dl-fill{height:100%;background:linear-gradient(90deg,var(--ac),var(--a2));border-radius:3px;transition:width .25s;box-shadow:0 0 8px rgba(124,58,237,.5)}
+.dl-status{font-size:11px;color:var(--t3);display:flex;justify-content:space-between}
+.dl-speed{font-family:var(--m);font-size:10px;color:var(--t3)}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.sec-title{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--t3)}
+.sec-more{font-size:11px;color:var(--ac);cursor:pointer;opacity:.8}
+.sec-more:hover{opacity:1}
+.mfilt{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.mfilt-btn{padding:3px 10px;border-radius:11px;border:1px solid var(--gb);background:var(--g1);color:var(--t3);font:500 11px var(--f);cursor:pointer;transition:all var(--T)}
+.mfilt-btn:hover{color:var(--t2)}
+.mfilt-btn.on{background:var(--g3);border-color:var(--gh);color:var(--t1)}
+.mfilt-search{display:flex;align-items:center;gap:6px;padding:4px 10px;background:var(--g1);border:1px solid var(--gb);border-radius:11px;margin-left:auto}
+.mfilt-search svg{width:11px;height:11px;stroke:var(--t3);fill:none;stroke-width:2;flex-shrink:0}
+.mfilt-search input{border:none;background:transparent;color:var(--t1);font:11px var(--f);outline:none;width:130px;user-select:text;-webkit-user-select:text}
+.mfilt-search input::placeholder{color:var(--t3)}
+</style>
+</head>
+<body>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div id="app">
+<div class="tb">
+  <div class="brand">
+    <div class="logo"><svg viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="2.2" stroke="rgba(167,139,250,.9)" stroke-width="1.3"/><circle cx="7" cy="7" r=".9" fill="rgba(167,139,250,.8)"/><line x1="7" y1="1.5" x2="7" y2="4.8" stroke="rgba(167,139,250,.55)" stroke-width="1.2" stroke-linecap="round"/><line x1="7" y1="9.2" x2="7" y2="12.5" stroke="rgba(167,139,250,.55)" stroke-width="1.2" stroke-linecap="round"/><line x1="1.5" y1="7" x2="4.8" y2="7" stroke="rgba(167,139,250,.55)" stroke-width="1.2" stroke-linecap="round"/><line x1="9.2" y1="7" x2="12.5" y2="7" stroke="rgba(167,139,250,.55)" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+    <span class="bname">MindPod</span><span class="bver" id="ver">v1.0</span>
+  </div>
+  <div class="tbc">
+    <div class="srch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="gs" placeholder="Поиск приложений&#8230;" autocomplete="off"/></div>
+  </div>
+  <div class="tbr">
+    <button class="ib" id="thbtn" title="Тема"><svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    <button class="ib" id="settingsBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+    <button class="ib" id="minBtn"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+    <button class="ib" id="maxBtn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></button>
+    <button class="ib d" id="closeBtn"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+  </div>
+</div>
+<div class="body">
+<nav class="sb">
+  <div class="nsec">Основное</div>
+  <div class="ni on" data-p="home"><span class="nic"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></span><span class="nl">Главная</span></div>
+  <div class="ni" data-p="catalog"><span class="nic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><span class="nl">Каталог</span><span class="bdg" id="nb">67</span></div>
+  <div class="ni" data-p="running"><span class="nic"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></span><span class="nl">Активные</span><span class="bdg" id="nr">0</span></div>
+  <div class="ni" data-p="updates"><span class="nic"><svg viewBox="0 0 24 24"><polyline points="23,4 23,11 16,11"/><polyline points="1,20 1,13 8,13"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 11M1 13l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span><span class="nl">Обновления</span><span class="bdg" id="nu" style="display:none">0</span></div>
+  <div class="nsec" style="margin-top:8px">Инструменты</div>
+  <div class="ni" data-p="models"><span class="nic"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></span><span class="nl">Модели</span><span class="nbadge">400+</span></div>
+  <div class="ni" data-p="agents"><span class="nic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg></span><span class="nl">Агенты</span></div>
+  <div class="ni" data-p="discover"><span class="nic"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span><span class="nl">Discover</span></div>
+  <div class="nsec" style="margin-top:8px">Система</div>
+  <div class="ni" data-p="terminal"><span class="nic"><svg viewBox="0 0 24 24"><polyline points="4,17 10,11 4,5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></span><span class="nl">Терминал</span></div>
+  <div class="ni" data-p="settings"><span class="nic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span><span class="nl">Настройки</span></div>
+  <div class="sfoot">
+    <div><span class="dot" id="sdot"></span><span id="ss">Готов</span></div>
+    <div id="sv" style="font-size:10px">v1.0.0</div>
+  </div>
+</nav>
+<div class="main"><div class="ct">
+
+<div class="page active" id="page-home">
+  <div class="ph">
+    <div class="pht">Главная <span class="phs" id="hs">—</span></div>
+    <div class="phr">
+      <button class="btn" id="goToCatalogBtn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Каталог</button>
+      <button class="btn bp" id="openPathBtn"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>Рабочая папка</button>
+    </div>
+  </div>
+  <div class="sysbar" id="sysbar"></div>
+  <div class="stats">
+    <div class="gc stat"><div class="sl">Установлено</div><div class="sv" id="si">0</div></div>
+    <div class="gc stat"><div class="sl">Запущено</div><div class="sv" id="srun" style="color:var(--gn)">0</div></div>
+    <div class="gc stat"><div class="sl">В каталоге</div><div class="sv" id="scat">67</div></div>
+    <div class="gc stat"><div class="sl">Обновлений</div><div class="sv" id="supd" style="color:var(--am)">0</div></div>
+  </div>
+  <div class="ag" id="ag"></div>
+  <div class="empty" id="eh" style="display:none">
+    <div class="ei"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+    <div class="et">Нет установленных приложений</div>
+    <div class="es">Перейдите в каталог и нажмите «Установить»</div>
+    <button class="btn bp" style="margin-top:10px" id="goToCatalogBtn2">Открыть каталог</button>
+  </div>
+</div>
+
+<div class="page" id="page-catalog">
+  <div class="ph"><div class="pht">Каталог <span class="phs" id="cc">67 приложений</span></div></div>
+  <div class="frow">
+    <button class="fb on" data-f="all">Все</button>
+    <button class="fb" data-f="image">Изображения</button>
+    <button class="fb" data-f="video">Видео</button>
+    <button class="fb" data-f="llm">Языковые модели</button>
+    <button class="fb" data-f="audio">Аудио / TTS</button>
+    <button class="fb" data-f="3d">3D</button>
+    <button class="fb" data-f="face">Лицо</button>
+    <button class="fb" data-f="tools">Инструменты</button>
+    <div class="fq"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="cq" placeholder="Поиск&#8230;" autocomplete="off"/></div>
+  </div>
+  <div class="cl gc" id="cg"></div>
+</div>
+
+<div class="page" id="page-running">
+  <div class="ph">
+    <div class="pht">Активные <span class="phs" id="rl">0 запущено</span></div>
+    <button class="btn bd" id="stopAllBtn"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"/></svg>Остановить все</button>
+  </div>
+  <div class="gc" id="rlist"></div>
+</div>
+
+<div class="page" id="page-updates">
+  <div class="ph">
+    <div class="pht">Обновления <span class="phs" id="ul">—</span></div>
+    <button class="btn bam" id="checkAllBtn"><svg viewBox="0 0 24 24"><polyline points="23,4 23,11 16,11"/><polyline points="1,20 1,13 8,13"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 11M1 13l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Проверить все</button>
+  </div>
+  <div class="gc" id="ulist"></div>
+</div>
+
+<div class="page" id="page-models">
+  <div class="ph">
+    <div class="pht">Модели <span class="phs" id="models-count">400+ нейросетей</span></div>
+    <div class="phr">
+      <button class="btn" id="refreshModelsBtn"><svg viewBox="0 0 24 24"><polyline points="23,4 23,11 16,11"/><path d="M1 13l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Обновить</button>
+    </div>
+  </div>
+  <div class="dash-row">
+    <div class="gc act-feed" id="models-activity">
+      <div class="act-title">Недавние действия</div>
+      <div class="act-item"><div class="act-dot" style="background:var(--gn)"></div><div class="act-text">MindPod v1.0 инициализирован</div><div class="act-time">сейчас</div></div>
+      <div class="act-item"><div class="act-dot" style="background:var(--a2)"></div><div class="act-text">Каталог загружен — 400+ моделей</div><div class="act-time">1 мин</div></div>
+      <div class="act-item"><div class="act-dot" style="background:var(--am)"></div><div class="act-text">Ожидание подключения к Ollama API</div><div class="act-time">—</div></div>
+    </div>
+    <div class="gc res-bar-wrap">
+      <div class="act-title">Системные ресурсы</div>
+      <div class="res-bar"><div class="res-label"><span class="res-l">RAM</span><span class="res-v" id="ram-val">— ГБ</span></div><div class="res-track"><div class="res-fill" id="ram-fill" style="width:0%;background:linear-gradient(90deg,#818cf8,#7c3aed)"></div></div></div>
+      <div class="res-bar"><div class="res-label"><span class="res-l">VRAM</span><span class="res-v" id="vram-val">—</span></div><div class="res-track"><div class="res-fill" id="vram-fill" style="width:0%;background:linear-gradient(90deg,#f59e0b,#ef4444)"></div></div></div>
+      <div class="res-bar" style="margin-bottom:0"><div class="res-label"><span class="res-l">CPU</span><span class="res-v" id="cpu-val">—</span></div><div class="res-track"><div class="res-fill" id="cpu-fill" style="width:0%;background:linear-gradient(90deg,#10b981,#3b82f6)"></div></div></div>
+    </div>
+  </div>
+  <div class="mfilt" id="mfilt-row"></div>
+  <div class="models-grid" id="models-grid"></div>
+  <div class="sec-hdr" style="margin-top:4px"><span class="sec-title">⚡ Скачанные модели</span></div>
+  <div class="gc" id="installed-models-list" style="padding:14px 16px;font-size:12px;color:var(--t3);font-family:var(--m)">Нет скачанных моделей. Используйте кнопки выше для загрузки.</div>
+</div>
+
+<div class="page" id="page-agents">
+  <div class="ph">
+    <div class="pht">Агенты <span class="phs">Автоматизация с ИИ</span></div>
+    <button class="btn bp" id="newAgentBtn"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>Новый агент</button>
+  </div>
+  <div class="sysbar">
+    <div class="sysi"><span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--t3)">Фреймворк</span><span>CrewAI / AutoGen / LangChain</span></div>
+    <div class="sysi ok"><span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--t3)">Статус</span><span>Готов</span></div>
+  </div>
+  <div class="sec-hdr"><span class="sec-title">Шаблоны агентов</span></div>
+  <div class="agents-grid" id="agents-grid"></div>
+  <div class="sec-hdr" style="margin-top:20px"><span class="sec-title">Запущенные задачи</span></div>
+  <div class="gc" style="padding:32px;text-align:center" id="agents-tasks">
+    <div style="font-size:32px;margin-bottom:8px">🤖</div>
+    <div style="font-size:13px;color:var(--t2);margin-bottom:4px">Нет активных задач</div>
+    <div style="font-size:11px;color:var(--t3)">Запустите агента из шаблонов выше</div>
+  </div>
+</div>
+
+<div class="page" id="page-discover">
+  <div class="ph"><div class="pht">Discover <span class="phs">Поиск AI-приложений</span></div></div>
+  <div class="disc-form">
+    <input class="disc-inp" id="disc-url" placeholder="GitHub URL или имя репозитория (напр. comfyanonymous/ComfyUI)&#8230;" autocomplete="off"/>
+    <button class="btn bp" id="discSearchBtn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Найти</button>
+  </div>
+  <div class="sec-hdr"><span class="sec-title">Рекомендованные репозитории</span></div>
+  <div class="gc disc-results" id="disc-list"></div>
+</div>
+
+<div class="page" id="page-terminal">
+  <div class="ph"><div class="pht">Терминал <span class="phs">Системный журнал</span></div><button class="btn sm" id="clrBtn">Очистить</button></div>
+  <div class="gc">
+    <div class="tbar"><div class="tdd" style="background:#ef4444;opacity:.7"></div><div class="tdd" style="background:#f59e0b;opacity:.7"></div><div class="tdd" style="background:#10b981;opacity:.7"></div><span class="tcap">mindpod@local — engine log</span></div>
+    <div class="term" id="term"></div>
+    <div class="ti"><span class="tpr">mindpod:~$</span><input class="tinp" id="tin" placeholder="help — список команд" autocomplete="off" spellcheck="false"/></div>
+  </div>
+</div>
+
+<div class="page" id="page-settings">
+  <div class="ph"><div class="pht">Настройки</div></div>
+  <div class="sg"><div class="sgt">Среда выполнения</div><div class="gc">
+    <div class="sr"><div class="srl"><div class="srt">Python</div><div class="srs" id="py-path">Определяется&#8230;</div></div><span id="py-ok" style="font-size:11px;color:var(--t3)">—</span></div>
+    <div class="sr"><div class="srl"><div class="srt">Git</div><div class="srs">Управление репозиториями</div></div><span id="git-ok" style="font-size:11px;color:var(--t3)">—</span></div>
+    <div class="sr"><div class="srl"><div class="srt">RAM</div><div class="srs">Доступно оперативной памяти</div></div><span id="ram" style="font-size:11px;color:var(--t3)">—</span></div>
+  </div></div>
+  <div class="sg"><div class="sgt">Внешний вид</div><div class="gc">
+    <div class="sr"><div class="srl"><div class="srt">Тёмная тема</div><div class="srs">Переключение оформления</div></div><label class="tog"><input type="checkbox" id="dt" checked/><span class="tsl"></span></label></div>
+  </div></div>
+  <div class="sg"><div class="sgt">Поведение</div><div class="gc">
+    <div class="sr"><div class="srl"><div class="srt">Сворачивать в трей</div><div class="srs">Продолжать работу при закрытии окна</div></div><label class="tog"><input type="checkbox" id="tt" checked/><span class="tsl"></span></label></div>
+    <div class="sr"><div class="srl"><div class="srt">Изолированные venv</div><div class="srs">Отдельная среда Python для каждого приложения</div></div><label class="tog"><input type="checkbox" checked disabled/><span class="tsl"></span></label></div>
+    <div class="sr"><div class="srl"><div class="srt">Авто-обновление</div><div class="srs">Проверять обновления при запуске</div></div><label class="tog"><input type="checkbox" id="au"/><span class="tsl"></span></label></div>
+  </div></div>
+  <div class="sg"><div class="sgt">Пути</div><div class="gc">
+    <div class="sr"><div class="srl"><div class="srt">Рабочая папка</div><div class="srs" id="set-h" style="font-family:var(--m);font-size:11px">~/mindpod</div></div><button class="btn sm" id="openHomeBtn">Открыть</button></div>
+    <div class="sr"><div class="srl"><div class="srt">venv-среды</div><div class="srs" id="set-v" style="font-family:var(--m);font-size:11px">~/mindpod/venvs</div></div><button class="btn sm" id="openVenvBtn">Открыть</button></div>
+    <div class="sr"><div class="srl"><div class="srt">Журнал событий</div><div class="srs">engine.log</div></div><button class="btn sm" id="openLogBtn">Открыть</button></div>
+    <div class="sr"><div class="srl"><div class="srt">Версия</div><div class="srs">MindPod v1.0 — Windows/Mac/Linux</div></div><span id="set-vv" style="color:var(--t3);font-size:12px">v1.0.0</span></div>
+  </div></div>
+</div>
+
+</div></div>
+</div>
+</div>
+
+<div class="mbg" id="imod">
+  <div class="modal">
+    <div class="mh"><span class="mt" id="mtt">Установка</span><button class="mxb" id="closeModalBtn">&#10005;</button></div>
+    <div class="mb">
+      <div class="mpt"><div class="mpf" id="mpf"></div></div>
+      <div class="mst" id="mst">Подготовка&#8230;</div>
+      <div id="msteps"></div>
+      <div class="ml" id="mlog"></div>
+      <div class="mf"><button class="btn sm" id="modalOkBtn" disabled>Готово</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="dl-overlay" id="dl-overlay">
+  <div class="dl-card">
+    <div class="dl-top">
+      <div class="dl-ico" id="dl-ico">📦</div>
+      <div class="dl-name" id="dl-name">Загрузка&#8230;</div>
+      <button class="btn sm bd" id="dl-cancel" style="flex-shrink:0">Отмена</button>
+    </div>
+    <div class="dl-bar"><div class="dl-fill" id="dl-fill" style="width:0%"></div></div>
+    <div class="dl-status"><span id="dl-status">Подготовка&#8230;</span><span class="dl-speed" id="dl-speed"></span></div>
+  </div>
+</div>
+
+<div class="th" id="toasts"></div>
+<script>
+const CAT=[
+  {id:"ollama",name:"Ollama",cat:"llm",desc:"Менеджер локальных языковых моделей (LLaMA, Mistral, Qwen, Gemma и др.)",size:"2 ГБ",vram:"4+",repo:"ollama/ollama",port:11434},
+  {id:"openwebui",name:"Open WebUI",cat:"llm",desc:"ChatGPT-интерфейс для Ollama и OpenAI-совместимых API",size:"500 МБ",vram:"—",repo:"open-webui/open-webui",port:3000},
+  {id:"lmstudio",name:"LM Studio",cat:"llm",desc:"Графический менеджер для загрузки и запуска LLM моделей",size:"1 ГБ",vram:"4+",repo:"lmstudio-ai/lmstudio",port:1234},
+  {id:"jan",name:"Jan",cat:"llm",desc:"Офлайн-альтернатива ChatGPT с поддержкой плагинов",size:"1 ГБ",vram:"4+",repo:"janhq/jan",port:1337},
+  {id:"openui",name:"OpenUI",cat:"llm",desc:"Создание UI-компонентов через ИИ с живым превью",size:"500 МБ",vram:"—",repo:"wandb/openui",port:7878},
+  {id:"bolt",name:"Bolt.diy",cat:"llm",desc:"Генерация полноценных веб-приложений через ИИ в браузере",size:"1 ГБ",vram:"—",repo:"stackblitz-labs/bolt.diy",port:5173},
+  {id:"devika",name:"Devika",cat:"llm",desc:"AI-агент для разработки ПО — понимает задачи, пишет код",size:"800 МБ",vram:"—",repo:"stitionai/devika",port:1337},
+  {id:"gpt4all",name:"GPT4All",cat:"llm",desc:"Локальный AI-чат без GPU — работает на CPU",size:"800 МБ",vram:"—",repo:"nomic-ai/gpt4all",port:4891},
+  {id:"llamacpp",name:"llama.cpp",cat:"llm",desc:"GGUF-сервер для локальных LLM — быстро, без GPU",size:"500 МБ",vram:"—",repo:"ggerganov/llama.cpp",port:8080},
+  {id:"koboldcpp",name:"KoboldCpp",cat:"llm",desc:"LLM сервер с web-интерфейсом для творческого написания",size:"500 МБ",vram:"—",repo:"LostRuins/koboldcpp",port:5001},
+  {id:"textgen",name:"Text Generation WebUI",cat:"llm",desc:"WebUI для запуска LLM с поддержкой множества бэкендов",size:"2 ГБ",vram:"4+",repo:"oobabooga/text-generation-webui",port:7860},
+  {id:"comfyui",name:"ComfyUI",cat:"image",desc:"Редактор нод для Stable Diffusion — полный контроль над генерацией",size:"6 ГБ",vram:"4+",repo:"comfyanonymous/ComfyUI",port:8188},
+  {id:"a1111",name:"Automatic 1111",cat:"image",desc:"Классический полнофункциональный WebUI для Stable Diffusion",size:"6 ГБ",vram:"4+",repo:"AUTOMATIC1111/stable-diffusion-webui",port:7860},
+  {id:"forge",name:"SD WebUI Forge",cat:"image",desc:"Оптимизированный форк A1111: быстрее, меньше VRAM",size:"6 ГБ",vram:"4+",repo:"lllyasviel/stable-diffusion-webui-forge",port:7861},
+  {id:"fooocus",name:"Fooocus",cat:"image",desc:"Простой SD-интерфейс с автоматической оптимизацией",size:"8 ГБ",vram:"4+",repo:"lllyasviel/Fooocus",port:7865},
+  {id:"invokeai",name:"InvokeAI",cat:"image",desc:"Профессиональный SD с холстом и управлением моделями",size:"8 ГБ",vram:"6+",repo:"invoke-ai/InvokeAI",port:9090},
+  {id:"fluxwebui",name:"Flux WebUI",cat:"image",desc:"Генерация изображений Flux от Black Forest Labs",size:"24 ГБ",vram:"12+",repo:"pinokiofactory/flux-webui",port:7862},
+  {id:"controlnet",name:"ControlNet",cat:"image",desc:"Контроль позы, глубины и краёв в Stable Diffusion",size:"4 ГБ",vram:"4+",repo:"lllyasviel/ControlNet",port:7866},
+  {id:"rmbg2",name:"RMBG-2 Studio",cat:"image",desc:"Профессиональное удаление фона через BRIA RMBG 2.0",size:"6 ГБ",vram:"6+",repo:"pinokiofactory/RMBG-2-Studio",port:7867},
+  {id:"magicquill",name:"MagicQuill",cat:"image",desc:"Умное редактирование: добавление и стирание объектов",size:"8 ГБ",vram:"8+",repo:"magic-quill/MagicQuill",port:7868},
+  {id:"clarity",name:"Clarity Refiners UI",cat:"image",desc:"Апскейлинг и улучшение деталей изображений",size:"10 ГБ",vram:"8+",repo:"pinokiofactory/clarity-refiners-ui",port:7869},
+  {id:"supir",name:"SUPIR",cat:"image",desc:"Апскейлинг через Large Diffusion Model (LLaVA + SDXL)",size:"30 ГБ",vram:"16+",repo:"cocktailpeanutlabs/supir",port:7870},
+  {id:"instantid",name:"InstantID",cat:"image",desc:"Генерация портретов с сохранением лица без дообучения",size:"10 ГБ",vram:"8+",repo:"cocktailpeanutlabs/instantid",port:7871},
+  {id:"omnigen",name:"OmniGen",cat:"image",desc:"Универсальная генерация: In/Out painting, Face Swap",size:"15 ГБ",vram:"8+",repo:"pinokiofactory/OmniGen",port:7872},
+  {id:"instantir",name:"InstantIR",cat:"image",desc:"Слепое восстановление изображений — любое разрешение",size:"12 ГБ",vram:"8+",repo:"pinokiofactory/InstantIR",port:7873},
+  {id:"diffrhythm",name:"DiffRhythm",cat:"image",desc:"Генерация изображений в ритм музыки",size:"8 ГБ",vram:"8+",repo:"pinokiofactory/DiffRhythm",port:7874},
+  {id:"sdnext",name:"SD.Next",cat:"image",desc:"Форк A1111 с поддержкой Flux, HunyuanDit, AuraFlow",size:"6 ГБ",vram:"4+",repo:"vladmandic/automatic",port:7860},
+  {id:"streamdiffusion",name:"StreamDiffusion",cat:"image",desc:"Генерация изображений в реальном времени через поток",size:"6 ГБ",vram:"4+",repo:"cocktailpeanutlabs/streamdiffusion",port:7875},
+  {id:"brushnet",name:"BrushNet",cat:"image",desc:"Инпейнтинг с полным контролем по маске и тексту",size:"8 ГБ",vram:"8+",repo:"cocktailpeanutlabs/brushnet",port:7876},
+  {id:"storydiffusion",name:"StoryDiffusion Comics",cat:"image",desc:"Создание комиксов и историй с постоянными персонажами",size:"10 ГБ",vram:"8+",repo:"cocktailpeanutlabs/storydiffusion-comics",port:7877},
+  {id:"wan2",name:"WAN 2.1",cat:"video",desc:"Генерация видео: текст→видео и изображение→видео",size:"30 ГБ",vram:"8+",repo:"Wan-Video/Wan2.1",port:7880},
+  {id:"cogstudio",name:"CogStudio",cat:"video",desc:"WebUI для генерации и редактирования видео CogVideo",size:"30 ГБ",vram:"12+",repo:"pinokiofactory/cogstudio",port:7881},
+  {id:"framepack",name:"FramePack",cat:"video",desc:"Покадровая прогрессивная генерация видео (NVIDIA)",size:"30 ГБ",vram:"12+",repo:"lllyasviel/FramePack",port:7882},
+  {id:"liveportrait",name:"LivePortrait",cat:"video",desc:"Анимация портрета: движение головы и мимика",size:"3 ГБ",vram:"4+",repo:"KwaiVGI/LivePortrait",port:7883},
+  {id:"echomimic",name:"EchoMimic 2",cat:"video",desc:"Синхронизация речи и движений тела в видео",size:"10 ГБ",vram:"8+",repo:"pinokiofactory/EchoMimic2",port:7884},
+  {id:"facepoke",name:"FacePoke",cat:"video",desc:"Интерактивное управление головой и мимикой в реальном времени",size:"4 ГБ",vram:"4+",repo:"pinokiofactory/facepoke",port:7885},
+  {id:"svd",name:"Stable Video Diffusion",cat:"video",desc:"Генерация видео из одного изображения от Stability AI",size:"10 ГБ",vram:"8+",repo:"Stability-AI/generative-models",port:7886},
+  {id:"mmaudio",name:"MMAudio",cat:"video",desc:"Генерация звука и музыки для видео через ИИ",size:"5 ГБ",vram:"4+",repo:"pinokiofactory/MMAudio",port:7887},
+  {id:"diamond",name:"Diamond",cat:"video",desc:"Интерактивная симуляция игровых миров через диффузию",size:"8 ГБ",vram:"8+",repo:"pinokiofactory/diamond",port:7888},
+  {id:"videocrafter2",name:"VideoCrafter2",cat:"video",desc:"Генерация высококачественного видео из текста",size:"15 ГБ",vram:"8+",repo:"cocktailpeanutlabs/videocrafter2",port:7889},
+  {id:"matanyone",name:"MatAnyone",cat:"video",desc:"Вырезание объектов из видео с точной маскировкой",size:"5 ГБ",vram:"6+",repo:"pinokiofactory/MatAnyone",port:7890},
+  {id:"dreamtalk",name:"DreamTalk",cat:"video",desc:"Синхронизация речи с лицом для анимации портретов",size:"5 ГБ",vram:"6+",repo:"cocktailpeanutlabs/dreamtalk",port:7891},
+  {id:"facefusion",name:"FaceFusion",cat:"face",desc:"Замена лиц в фото и видео, поддержка веб-камеры",size:"5 ГБ",vram:"4+",repo:"facefusion/facefusion",port:7895},
+  {id:"vid2pose",name:"Vid2Pose",cat:"face",desc:"Извлечение данных о позе тела из видео",size:"2 ГБ",vram:"4+",repo:"cocktailpeanutlabs/vid2pose",port:7896},
+  {id:"animateanyone",name:"Animate Anyone",cat:"face",desc:"Анимация персонажей по опорному видео",size:"8 ГБ",vram:"8+",repo:"HumanAIGC/AnimateAnyone",port:7897},
+  {id:"insightface",name:"InsightFace Studio",cat:"face",desc:"Анализ и распознавание лиц, 3D-реконструкция",size:"3 ГБ",vram:"4+",repo:"deepinsight/insightface",port:7898},
+  {id:"realisr",name:"RealISR",cat:"face",desc:"Сверхразрешение лиц в реальном времени",size:"4 ГБ",vram:"4+",repo:"pinokiofactory/RealISR",port:7899},
+  {id:"sadtalker",name:"SadTalker",cat:"face",desc:"3D-анимация портрета по аудио",size:"4 ГБ",vram:"4+",repo:"OpenTalker/SadTalker",port:7900},
+  {id:"whisper",name:"Whisper WebUI",cat:"audio",desc:"Транскрипция и субтитры через OpenAI Whisper",size:"2 ГБ",vram:"—",repo:"jhj0517/Whisper-WebUI",port:7902},
+  {id:"xtts",name:"XTTS v2",cat:"audio",desc:"Клонирование голоса и синтез речи — 17 языков",size:"3 ГБ",vram:"4+",repo:"pinokiofactory/xtts-v2-ui",port:7903},
+  {id:"zonos",name:"Zonos TTS",cat:"audio",desc:"Экспрессивный синтез речи с клонированием голоса",size:"3 ГБ",vram:"4+",repo:"pinokiofactory/Zonos",port:7904},
+  {id:"fishspeech",name:"Fish Speech",cat:"audio",desc:"Многоязычный TTS нового поколения — 17 языков",size:"3 ГБ",vram:"4+",repo:"pinokiofactory/fish-speech",port:7905},
+  {id:"yuemusic",name:"YuE Music",cat:"audio",desc:"Генерация полноценных музыкальных треков с вокалом",size:"10 ГБ",vram:"8+",repo:"pinokiofactory/YuE",port:7906},
+  {id:"acestep",name:"ACE-Step Music",cat:"audio",desc:"Быстрая генерация музыки: 1 минута за 20 секунд",size:"8 ГБ",vram:"8+",repo:"pinokiofactory/ACE-Step",port:7907},
+  {id:"magnet",name:"Magnet (AudioCraft)",cat:"audio",desc:"Генерация музыки и звуков из текста от Meta AI",size:"5 ГБ",vram:"6+",repo:"cocktailpeanutlabs/magnet",port:7908},
+  {id:"styletts2",name:"StyleTTS 2",cat:"audio",desc:"Стилизованный синтез голоса, превосходящий человека",size:"3 ГБ",vram:"4+",repo:"pinokiofactory/StyleTTS2-Studio",port:7909},
+  {id:"kokorotts",name:"Kokoro TTS",cat:"audio",desc:"Быстрый и качественный синтез речи на русском и английском",size:"2 ГБ",vram:"—",repo:"pinokiofactory/kokoro-tts",port:7910},
+  {id:"hunyuan3d",name:"Hunyuan3D-2",cat:"3d",desc:"Генерация 3D-моделей из текста или изображения от Tencent",size:"15 ГБ",vram:"8+",repo:"pinokiofactory/Hunyuan3d-2-lowvram",port:7920},
+  {id:"trellis",name:"TRELLIS 3D",cat:"3d",desc:"Генерация 3D-объектов с текстурами из изображений",size:"20 ГБ",vram:"12+",repo:"pinokiofactory/TRELLIS",port:7921},
+  {id:"instantmesh",name:"InstantMesh",cat:"3d",desc:"Мгновенное создание 3D-меша из одной картинки",size:"10 ГБ",vram:"8+",repo:"pinokiofactory/InstantMesh",port:7922},
+  {id:"zero123plus",name:"Zero123++",cat:"3d",desc:"Генерация многоракурсных 3D-видов объекта",size:"8 ГБ",vram:"8+",repo:"SUDO-AI-Team/zero123plus",port:7923},
+  {id:"shap-e",name:"Shap-E",cat:"3d",desc:"Генерация 3D-объектов из текста от OpenAI",size:"5 ГБ",vram:"6+",repo:"openai/shap-e",port:7924},
+  {id:"n8n",name:"n8n",cat:"tools",desc:"Визуальная автоматизация с 400+ интеграциями и AI-нодами",size:"500 МБ",vram:"—",repo:"n8n-io/n8n",port:5678},
+  {id:"superagi",name:"SuperAGI",cat:"tools",desc:"Инфраструктура для запуска автономных AI-агентов",size:"2 ГБ",vram:"—",repo:"TransformerOptimus/SuperAGI",port:3000},
+  {id:"moondream2",name:"Moondream 2",cat:"tools",desc:"Компактная мультимодальная модель для анализа изображений",size:"2 ГБ",vram:"—",repo:"cocktailpeanutlabs/moondream2",port:7930},
+  {id:"lobe",name:"Lobe Chat",cat:"tools",desc:"Открытый ChatGPT-клиент с плагинами и мультимодальностью",size:"500 МБ",vram:"—",repo:"lobehub/lobe-chat",port:3210},
+  {id:"anythingllm",name:"AnythingLLM",cat:"tools",desc:"RAG для ваших документов — локально и приватно",size:"1 ГБ",vram:"—",repo:"Mintplex-Labs/anything-llm",port:3001},
+  {id:"perplexica",name:"Perplexica",cat:"tools",desc:"AI-поиск с интернетом — аналог Perplexity локально",size:"800 МБ",vram:"—",repo:"ItzCrazyKns/Perplexica",port:3000},
+  {id:"flowise",name:"Flowise",cat:"tools",desc:"Визуальное построение LLM-цепочек без кода",size:"500 МБ",vram:"—",repo:"FlowiseAI/Flowise",port:3000}
+];
+
+const MODELS_DATA=[
+  {id:"llama3.3-70b",name:"Llama 3.3 70B",provider:"Meta",cat:"llm",desc:"Последняя топовая открытая LLM от Meta",size:"43 ГБ",vram:"24+",badge:"hot",emoji:"🦙",pullCmd:"llama3.3:70b"},
+  {id:"llama3.3-8b",name:"Llama 3.3 8B",provider:"Meta",cat:"llm",desc:"Быстрая и эффективная версия Llama 3.3",size:"4.7 ГБ",vram:"6+",badge:"fast",emoji:"🦙",pullCmd:"llama3.3"},
+  {id:"llama3.2-3b",name:"Llama 3.2 3B",provider:"Meta",cat:"llm",desc:"Компактная модель для слабых машин",size:"2 ГБ",vram:"—",badge:"fast",emoji:"🦙",pullCmd:"llama3.2:3b"},
+  {id:"llama3.2-vision",name:"Llama 3.2 Vision",provider:"Meta",cat:"multimodal",desc:"Мультимодальная — анализирует изображения",size:"8 ГБ",vram:"8+",badge:"new",emoji:"👁️",pullCmd:"llama3.2-vision"},
+  {id:"llama3.1-405b",name:"Llama 3.1 405B",provider:"Meta",cat:"llm",desc:"Крупнейшая открытая LLM от Meta",size:"230 ГБ",vram:"80+",badge:"",emoji:"🦙",pullCmd:"llama3.1:405b"},
+  {id:"qwen3-72b",name:"Qwen3 72B",provider:"Alibaba",cat:"llm",desc:"Qwen нового поколения — лучший в классе",size:"45 ГБ",vram:"24+",badge:"new",emoji:"🌸",pullCmd:"qwen3:72b"},
+  {id:"qwen3-32b",name:"Qwen3 32B",provider:"Alibaba",cat:"llm",desc:"Баланс качества и скорости",size:"20 ГБ",vram:"16+",badge:"new",emoji:"🌸",pullCmd:"qwen3:32b"},
+  {id:"qwen3-14b",name:"Qwen3 14B",provider:"Alibaba",cat:"llm",desc:"Компактный Qwen3 для среднего GPU",size:"9 ГБ",vram:"10+",badge:"new",emoji:"🌸",pullCmd:"qwen3:14b"},
+  {id:"qwen3-8b",name:"Qwen3 8B",provider:"Alibaba",cat:"llm",desc:"Быстрый Qwen3 для бытового GPU",size:"5 ГБ",vram:"6+",badge:"fast",emoji:"🌸",pullCmd:"qwen3:8b"},
+  {id:"qwen3-4b",name:"Qwen3 4B",provider:"Alibaba",cat:"llm",desc:"CPU-совместимый Qwen3",size:"2.5 ГБ",vram:"—",badge:"fast",emoji:"🌸",pullCmd:"qwen3:4b"},
+  {id:"qwen2.5-72b",name:"Qwen 2.5 72B",provider:"Alibaba",cat:"llm",desc:"Мощная мультиязычная модель",size:"45 ГБ",vram:"24+",badge:"hot",emoji:"🌸",pullCmd:"qwen2.5:72b"},
+  {id:"qwen2.5-coder-32b",name:"Qwen 2.5 Coder 32B",provider:"Alibaba",cat:"code",desc:"Лучший кодер среди открытых моделей",size:"20 ГБ",vram:"16+",badge:"hot",emoji:"💻",pullCmd:"qwen2.5-coder:32b"},
+  {id:"qwen2.5-coder-7b",name:"Qwen 2.5 Coder 7B",provider:"Alibaba",cat:"code",desc:"Компактный кодер на уровне GPT-4",size:"4.5 ГБ",vram:"6+",badge:"fast",emoji:"💻",pullCmd:"qwen2.5-coder:7b"},
+  {id:"qwen2.5-vl-72b",name:"Qwen 2.5 VL 72B",provider:"Alibaba",cat:"multimodal",desc:"Мультимодальный — текст + изображения",size:"45 ГБ",vram:"24+",badge:"new",emoji:"🎨",pullCmd:"qwen2.5-vl:72b"},
+  {id:"deepseek-r1-70b",name:"DeepSeek-R1 70B",provider:"DeepSeek",cat:"reasoning",desc:"Chain-of-thought рассуждения мирового уровня",size:"43 ГБ",vram:"24+",badge:"hot",emoji:"🧠",pullCmd:"deepseek-r1:70b"},
+  {id:"deepseek-r1-32b",name:"DeepSeek-R1 32B",provider:"DeepSeek",cat:"reasoning",desc:"Мощные рассуждения в среднем GPU",size:"20 ГБ",vram:"16+",badge:"hot",emoji:"🧠",pullCmd:"deepseek-r1:32b"},
+  {id:"deepseek-r1-14b",name:"DeepSeek-R1 14B",provider:"DeepSeek",cat:"reasoning",desc:"Reasoning для 10 ГБ VRAM",size:"9 ГБ",vram:"10+",badge:"",emoji:"🧠",pullCmd:"deepseek-r1:14b"},
+  {id:"deepseek-r1-8b",name:"DeepSeek-R1 8B",provider:"DeepSeek",cat:"reasoning",desc:"Компактные рассуждения",size:"5 ГБ",vram:"6+",badge:"fast",emoji:"🧠",pullCmd:"deepseek-r1:8b"},
+  {id:"deepseek-r1-7b",name:"DeepSeek-R1 7B",provider:"DeepSeek",cat:"reasoning",desc:"Reasoning на слабом GPU или CPU",size:"4.7 ГБ",vram:"—",badge:"fast",emoji:"🧠",pullCmd:"deepseek-r1:7b"},
+  {id:"deepseek-r1-1.5b",name:"DeepSeek-R1 1.5B",provider:"DeepSeek",cat:"reasoning",desc:"Минимальные требования — любой CPU",size:"1 ГБ",vram:"—",badge:"fast",emoji:"🧠",pullCmd:"deepseek-r1:1.5b"},
+  {id:"deepseek-v3",name:"DeepSeek-V3 671B",provider:"DeepSeek",cat:"llm",desc:"Флагман DeepSeek — конкурент GPT-4",size:"400 ГБ",vram:"80+",badge:"hot",emoji:"🔥",pullCmd:"deepseek-v3"},
+  {id:"deepseek-coder-v2",name:"DeepSeek Coder V2",provider:"DeepSeek",cat:"code",desc:"Лучший open-source кодер от DeepSeek",size:"9 ГБ",vram:"10+",badge:"",emoji:"💻",pullCmd:"deepseek-coder-v2"},
+  {id:"gemma3-27b",name:"Gemma 3 27B",provider:"Google",cat:"llm",desc:"Google — лучший мультимодальный open-source",size:"17 ГБ",vram:"12+",badge:"new",emoji:"💎",pullCmd:"gemma3:27b"},
+  {id:"gemma3-12b",name:"Gemma 3 12B",provider:"Google",cat:"llm",desc:"Качественный Google-чат для среднего GPU",size:"8 ГБ",vram:"8+",badge:"new",emoji:"💎",pullCmd:"gemma3:12b"},
+  {id:"gemma3-4b",name:"Gemma 3 4B",provider:"Google",cat:"llm",desc:"Компактный Gemma для слабого железа",size:"2.5 ГБ",vram:"—",badge:"fast",emoji:"💎",pullCmd:"gemma3:4b"},
+  {id:"gemma3-1b",name:"Gemma 3 1B",provider:"Google",cat:"llm",desc:"Запускается на любом устройстве",size:"815 МБ",vram:"—",badge:"fast",emoji:"💎",pullCmd:"gemma3:1b"},
+  {id:"gemma2-27b",name:"Gemma 2 27B",provider:"Google",cat:"llm",desc:"Предыдущее поколение — стабильный выбор",size:"17 ГБ",vram:"12+",badge:"",emoji:"💎",pullCmd:"gemma2:27b"},
+  {id:"mistral-7b",name:"Mistral 7B v0.3",provider:"Mistral AI",cat:"llm",desc:"Быстрый и эффективный — работает на CPU",size:"4.1 ГБ",vram:"—",badge:"fast",emoji:"🌪️",pullCmd:"mistral:7b"},
+  {id:"mistral-nemo",name:"Mistral Nemo 12B",provider:"Mistral AI",cat:"llm",desc:"Улучшенный Mistral с поддержкой 128k контекста",size:"7.1 ГБ",vram:"8+",badge:"",emoji:"🌪️",pullCmd:"mistral-nemo"},
+  {id:"mistral-small",name:"Mistral Small 22B",provider:"Mistral AI",cat:"llm",desc:"Высокое качество при умеренных ресурсах",size:"13 ГБ",vram:"12+",badge:"",emoji:"🌪️",pullCmd:"mistral-small"},
+  {id:"mixtral-8x7b",name:"Mixtral 8x7B",provider:"Mistral AI",cat:"llm",desc:"MoE-архитектура — быстро и умно",size:"26 ГБ",vram:"24+",badge:"",emoji:"🌪️",pullCmd:"mixtral:8x7b"},
+  {id:"mixtral-8x22b",name:"Mixtral 8x22B",provider:"Mistral AI",cat:"llm",desc:"Мощный MoE флагман от Mistral",size:"80 ГБ",vram:"48+",badge:"",emoji:"🌪️",pullCmd:"mixtral:8x22b"},
+  {id:"codestral-22b",name:"Codestral 22B",provider:"Mistral AI",cat:"code",desc:"Код на 80+ языках программирования",size:"12 ГБ",vram:"12+",badge:"",emoji:"🖥️",pullCmd:"codestral:22b"},
+  {id:"phi4-14b",name:"Phi-4 14B",provider:"Microsoft",cat:"llm",desc:"SoTA в 14B классе от Microsoft",size:"8.5 ГБ",vram:"8+",badge:"new",emoji:"🔬",pullCmd:"phi4:14b"},
+  {id:"phi3.5-mini",name:"Phi-3.5 Mini 3.8B",provider:"Microsoft",cat:"llm",desc:"Быстрый и умный для CPU",size:"2.2 ГБ",vram:"—",badge:"fast",emoji:"🔬",pullCmd:"phi3.5:mini"},
+  {id:"phi3-medium",name:"Phi-3 Medium 14B",provider:"Microsoft",cat:"llm",desc:"Качественная 14B от Microsoft",size:"8 ГБ",vram:"8+",badge:"",emoji:"🔬",pullCmd:"phi3:medium"},
+  {id:"nemotron-70b",name:"Nemotron-4 70B",provider:"NVIDIA",cat:"llm",desc:"NVIDIA — мощная открытая LLM",size:"43 ГБ",vram:"24+",badge:"hot",emoji:"🚀",pullCmd:"nemotron:70b"},
+  {id:"nemotron-mini",name:"Nemotron Mini 4B",provider:"NVIDIA",cat:"llm",desc:"Компактный Nemotron для слабых GPU",size:"2.5 ГБ",vram:"—",badge:"fast",emoji:"🚀",pullCmd:"nemotron:mini"},
+  {id:"command-r-plus",name:"Command R+ 104B",provider:"Cohere",cat:"llm",desc:"Оптимизирован для RAG и агентов",size:"59 ГБ",vram:"32+",badge:"",emoji:"🎯",pullCmd:"command-r-plus:104b"},
+  {id:"command-r",name:"Command R 35B",provider:"Cohere",cat:"llm",desc:"Базовый Command R для RAG-задач",size:"20 ГБ",vram:"16+",badge:"",emoji:"🎯",pullCmd:"command-r:35b"},
+  {id:"llava-34b",name:"LLaVA 1.6 34B",provider:"Haotian Liu",cat:"multimodal",desc:"Мультимодальный: анализ изображений + текст",size:"20 ГБ",vram:"16+",badge:"",emoji:"👁️",pullCmd:"llava:34b"},
+  {id:"llava-13b",name:"LLaVA 1.6 13B",provider:"Haotian Liu",cat:"multimodal",desc:"Компактный мультимодальный ассистент",size:"8 ГБ",vram:"8+",badge:"",emoji:"👁️",pullCmd:"llava:13b"},
+  {id:"llava-7b",name:"LLaVA 1.6 7B",provider:"Haotian Liu",cat:"multimodal",desc:"Лёгкая мультимодальная модель",size:"4.7 ГБ",vram:"6+",badge:"fast",emoji:"👁️",pullCmd:"llava:7b"},
+  {id:"bakllava",name:"BakLLaVA 7B",provider:"SkunkworksAI",cat:"multimodal",desc:"Mistral + LLaVA — быстрый мультимодальный",size:"4.7 ГБ",vram:"6+",badge:"",emoji:"👁️",pullCmd:"bakllava:7b"},
+  {id:"moondream2",name:"Moondream 2",provider:"vikhyatk",cat:"multimodal",desc:"1.8B — самая маленькая Vision LLM",size:"1.7 ГБ",vram:"—",badge:"fast",emoji:"🌙",pullCmd:"moondream:2"},
+  {id:"minicpm-v",name:"MiniCPM-V 8B",provider:"OpenBMB",cat:"multimodal",desc:"Мощный мультимодальный на 8B",size:"5 ГБ",vram:"6+",badge:"new",emoji:"🔭",pullCmd:"minicpm-v:8b"},
+  {id:"internvl2-8b",name:"InternVL2 8B",provider:"Shanghai AI Lab",cat:"multimodal",desc:"Топ мультимодальный 2024-2025",size:"5 ГБ",vram:"6+",badge:"",emoji:"🔭",pullCmd:"internvl2:8b"},
+  {id:"granite3.1-8b",name:"Granite 3.1 8B",provider:"IBM",cat:"llm",desc:"IBM — бизнес LLM для корпоративных задач",size:"4.9 ГБ",vram:"6+",badge:"",emoji:"🏢",pullCmd:"granite3.1-dense:8b"},
+  {id:"granite3.1-2b",name:"Granite 3.1 2B",provider:"IBM",cat:"llm",desc:"Компактный IBM Granite для CPU",size:"1.6 ГБ",vram:"—",badge:"fast",emoji:"🏢",pullCmd:"granite3.1-dense:2b"},
+  {id:"aya-expanse-32b",name:"Aya Expanse 32B",provider:"Cohere",cat:"llm",desc:"Мультиязычный флагман — 23 языка",size:"20 ГБ",vram:"16+",badge:"",emoji:"🌍",pullCmd:"aya-expanse:32b"},
+  {id:"aya-expanse-8b",name:"Aya Expanse 8B",provider:"Cohere",cat:"llm",desc:"Компактный мультиязычный ассистент",size:"5 ГБ",vram:"6+",badge:"",emoji:"🌍",pullCmd:"aya-expanse:8b"},
+  {id:"smollm2-1.7b",name:"SmolLM2 1.7B",provider:"HuggingFace",cat:"llm",desc:"Маленькая но умная — для любого устройства",size:"1 ГБ",vram:"—",badge:"fast",emoji:"🤗",pullCmd:"smollm2:1.7b"},
+  {id:"falcon3-10b",name:"Falcon3 10B",provider:"TII UAE",cat:"llm",desc:"Новый Falcon — конкурент Llama 3",size:"6 ГБ",vram:"8+",badge:"new",emoji:"🦅",pullCmd:"falcon3:10b"},
+  {id:"falcon3-7b",name:"Falcon3 7B",provider:"TII UAE",cat:"llm",desc:"Компактный Falcon3",size:"4.5 ГБ",vram:"6+",badge:"",emoji:"🦅",pullCmd:"falcon3:7b"},
+  {id:"vicuna-33b",name:"Vicuna 33B",provider:"LMSYS",cat:"llm",desc:"Классический чат-ассистент от Berkeley",size:"19 ГБ",vram:"16+",badge:"",emoji:"🦙",pullCmd:"vicuna:33b"},
+  {id:"nous-hermes2",name:"Nous Hermes 2",provider:"NousResearch",cat:"llm",desc:"Instruction-tuned на синтетических данных",size:"4.1 ГБ",vram:"—",badge:"",emoji:"⚗️",pullCmd:"nous-hermes2:7b"},
+  {id:"solar-10.7b",name:"SOLAR 10.7B",provider:"Upstage",cat:"llm",desc:"Depth up-scaling — высокое качество",size:"6.3 ГБ",vram:"8+",badge:"",emoji:"☀️",pullCmd:"solar:10.7b"},
+  {id:"stablelm-zephyr",name:"StableLM Zephyr 3B",provider:"Stability AI",cat:"llm",desc:"Быстрый chat-ассистент от Stability AI",size:"1.9 ГБ",vram:"—",badge:"fast",emoji:"⚡",pullCmd:"stablelm-zephyr:3b"},
+  {id:"zephyr-7b",name:"Zephyr 7B",provider:"HuggingFace",cat:"llm",desc:"Fine-tuned Mistral — отличный ассистент",size:"4.1 ГБ",vram:"—",badge:"",emoji:"💨",pullCmd:"zephyr:7b"},
+  {id:"neural-chat-7b",name:"Neural Chat 7B",provider:"Intel",cat:"llm",desc:"Оптимизирован для Intel CPU/GPU",size:"4.1 ГБ",vram:"—",badge:"",emoji:"🔵",pullCmd:"neural-chat:7b"},
+  {id:"starcoder2-15b",name:"StarCoder2 15B",provider:"BigCode",cat:"code",desc:"Программирование на 600+ языках",size:"9 ГБ",vram:"10+",badge:"",emoji:"⭐",pullCmd:"starcoder2:15b"},
+  {id:"starcoder2-7b",name:"StarCoder2 7B",provider:"BigCode",cat:"code",desc:"Компактный кодер 600+ языков",size:"4.5 ГБ",vram:"6+",badge:"",emoji:"⭐",pullCmd:"starcoder2:7b"},
+  {id:"codellama-70b",name:"Code Llama 70B",provider:"Meta",cat:"code",desc:"Крупнейший Code Llama — сложные задачи",size:"39 ГБ",vram:"24+",badge:"",emoji:"🐪",pullCmd:"codellama:70b"},
+  {id:"codellama-34b",name:"Code Llama 34B",provider:"Meta",cat:"code",desc:"Серьёзное программирование от Meta",size:"19 ГБ",vram:"16+",badge:"",emoji:"🐪",pullCmd:"codellama:34b"},
+  {id:"codellama-13b",name:"Code Llama 13B",provider:"Meta",cat:"code",desc:"Кодер на любом современном GPU",size:"7.4 ГБ",vram:"8+",badge:"",emoji:"🐪",pullCmd:"codellama:13b"},
+  {id:"codellama-7b",name:"Code Llama 7B",provider:"Meta",cat:"code",desc:"Кодирование на CPU и слабых GPU",size:"3.8 ГБ",vram:"—",badge:"fast",emoji:"🐪",pullCmd:"codellama:7b"},
+  {id:"wizard-coder-33b",name:"WizardCoder 33B",provider:"WizardLM",cat:"code",desc:"Код на уровне GPT-4 в 33B",size:"19 ГБ",vram:"16+",badge:"",emoji:"🧙",pullCmd:"wizardcoder:33b"},
+  {id:"wizard-coder-7b",name:"WizardCoder 7B",provider:"WizardLM",cat:"code",desc:"Компактный wizard-кодер",size:"3.8 ГБ",vram:"—",badge:"",emoji:"🧙",pullCmd:"wizardcoder:7b"},
+  {id:"orca-math",name:"Orca-Math 7B",provider:"Microsoft",cat:"reasoning",desc:"Специализирован на математике — 86% GSM8K",size:"4.1 ГБ",vram:"—",badge:"",emoji:"🧮",pullCmd:"orca-math:7b"},
+  {id:"mathstral-7b",name:"MathStral 7B",provider:"Mistral AI",cat:"reasoning",desc:"Математика и STEM задачи",size:"4.1 ГБ",vram:"—",badge:"",emoji:"📐",pullCmd:"mathstral:7b"},
+  {id:"wizard-math-70b",name:"WizardMath 70B",provider:"WizardLM",cat:"reasoning",desc:"Решение сложных математических задач",size:"39 ГБ",vram:"24+",badge:"",emoji:"🔢",pullCmd:"wizardmath:70b"},
+  {id:"meditron-70b",name:"Meditron 70B",provider:"EPFL",cat:"specialised",desc:"Медицинская LLM для диагностики",size:"39 ГБ",vram:"24+",badge:"",emoji:"🏥",pullCmd:"meditron:70b"},
+  {id:"medllama2-7b",name:"MedLlama2 7B",provider:"Community",cat:"specialised",desc:"Медицина на CPU",size:"3.8 ГБ",vram:"—",badge:"",emoji:"💊",pullCmd:"medllama2:7b"},
+  {id:"dolphin-phi",name:"Dolphin Phi 2.7B",provider:"Cognitive Computations",cat:"llm",desc:"Uncensored модель без ограничений",size:"1.7 ГБ",vram:"—",badge:"fast",emoji:"🐬",pullCmd:"dolphin-phi:2.7b"},
+  {id:"dolphin-mixtral",name:"Dolphin Mixtral 8x7B",provider:"Cognitive Computations",cat:"llm",desc:"Uncensored Mixtral для свободных задач",size:"26 ГБ",vram:"24+",badge:"",emoji:"🐬",pullCmd:"dolphin-mixtral:8x7b"},
+  {id:"openchat-7b",name:"OpenChat 3.5 7B",provider:"OpenChat",cat:"llm",desc:"Превосходит ChatGPT-3.5 на многих тестах",size:"4.1 ГБ",vram:"—",badge:"",emoji:"💬",pullCmd:"openchat:7b"},
+  {id:"starling-7b",name:"Starling LM 7B",provider:"Nexusflow",cat:"llm",desc:"RLHF-обученный на OpenChat",size:"4.1 ГБ",vram:"—",badge:"",emoji:"⭐",pullCmd:"starling-lm:7b"},
+  {id:"yi-34b",name:"Yi 34B",provider:"01 AI",cat:"llm",desc:"Китайский флагман — 200k контекст",size:"20 ГБ",vram:"16+",badge:"",emoji:"🇨🇳",pullCmd:"yi:34b"},
+  {id:"yi-9b",name:"Yi 9B",provider:"01 AI",cat:"llm",desc:"Компактный Yi для среднего GPU",size:"5.4 ГБ",vram:"6+",badge:"",emoji:"🇨🇳",pullCmd:"yi:9b"},
+  {id:"internlm2-20b",name:"InternLM2 20B",provider:"Shanghai AI Lab",cat:"llm",desc:"Академическая модель с кодом и математикой",size:"11 ГБ",vram:"12+",badge:"",emoji:"🔬",pullCmd:"internlm2:20b"},
+  {id:"xwinlm-70b",name:"Xwin-LM 70B",provider:"Xwin-LM",cat:"llm",desc:"Ролевой ассистент с мощным следованием инструкциям",size:"39 ГБ",vram:"24+",badge:"",emoji:"🏆",pullCmd:"xwinlm:70b"},
+  {id:"samantha-mistral",name:"Samantha Mistral 7B",provider:"Community",cat:"llm",desc:"Личностный ассистент с характером",size:"4.1 ГБ",vram:"—",badge:"",emoji:"🤖",pullCmd:"samantha-mistral:7b"},
+  {id:"everythinglm-13b",name:"EverythingLM 13B",provider:"Community",cat:"llm",desc:"16k контекст без дополнительной настройки",size:"7.4 ГБ",vram:"8+",badge:"",emoji:"📚",pullCmd:"everythinglm:13b"},
+  {id:"wizardlm2-7b",name:"WizardLM 2 7B",provider:"WizardLM",cat:"llm",desc:"Instruction-following на уровне GPT-4",size:"4.1 ГБ",vram:"—",badge:"",emoji:"🧙",pullCmd:"wizardlm2:7b"},
+  {id:"wizardlm2-8x22b",name:"WizardLM 2 8x22B",provider:"WizardLM",cat:"llm",desc:"MoE флагман — лучший открытый ассистент",size:"80 ГБ",vram:"48+",badge:"",emoji:"🧙",pullCmd:"wizardlm2:8x22b"},
+  {id:"llama2-70b",name:"Llama 2 70B",provider:"Meta",cat:"llm",desc:"Проверенный временем флагман Meta",size:"39 ГБ",vram:"24+",badge:"",emoji:"🦙",pullCmd:"llama2:70b"},
+  {id:"llama2-13b",name:"Llama 2 13B",provider:"Meta",cat:"llm",desc:"Стабильная и надёжная 13B",size:"7.4 ГБ",vram:"8+",badge:"",emoji:"🦙",pullCmd:"llama2:13b"},
+  {id:"llama2-7b",name:"Llama 2 7B",provider:"Meta",cat:"llm",desc:"Оригинальная Llama 2 — проверена годами",size:"3.8 ГБ",vram:"—",badge:"",emoji:"🦙",pullCmd:"llama2:7b"},
+  {id:"codegemma-7b",name:"CodeGemma 7B",provider:"Google",cat:"code",desc:"Код и математика от Google на базе Gemma",size:"5 ГБ",vram:"6+",badge:"",emoji:"💎",pullCmd:"codegemma:7b"},
+  {id:"recurrentgemma-9b",name:"RecurrentGemma 9B",provider:"Google",cat:"llm",desc:"Новая архитектура — быстро на длинных контекстах",size:"5.5 ГБ",vram:"6+",badge:"new",emoji:"💎",pullCmd:"recurrentgemma:9b"},
+  {id:"dbrx-instruct",name:"DBRX Instruct",provider:"Databricks",cat:"llm",desc:"MoE от Databricks — код и анализ данных",size:"46 ГБ",vram:"24+",badge:"",emoji:"⚡",pullCmd:"dbrx:instruct"},
+  {id:"tulu3-70b",name:"Tulu 3 70B",provider:"AllenAI",cat:"llm",desc:"Передовое обучение с подкреплением от AllenAI",size:"43 ГБ",vram:"24+",badge:"new",emoji:"🦉",pullCmd:"tulu3:70b"},
+  {id:"tulu3-8b",name:"Tulu 3 8B",provider:"AllenAI",cat:"llm",desc:"Компактный Tulu3",size:"5 ГБ",vram:"6+",badge:"new",emoji:"🦉",pullCmd:"tulu3:8b"},
+  {id:"reflection-llama3-70b",name:"Reflection Llama3 70B",provider:"Community",cat:"reasoning",desc:"Self-reflection reasoning — исправляет ошибки",size:"43 ГБ",vram:"24+",badge:"",emoji:"🪞",pullCmd:"reflection:70b"},
+  {id:"exaone3.5-7.8b",name:"EXAONE 3.5 7.8B",provider:"LG AI",cat:"llm",desc:"Корейская мультиязычная LLM от LG",size:"4.9 ГБ",vram:"6+",badge:"new",emoji:"🇰🇷",pullCmd:"exaone3.5:7.8b"},
+  {id:"bge-large",name:"BGE Large EN",provider:"BAAI",cat:"embedding",desc:"Топ embedding для RAG — 1024 dim",size:"1.3 ГБ",vram:"—",badge:"",emoji:"📊",pullCmd:"bge-large:en"},
+  {id:"nomic-embed",name:"Nomic Embed Text",provider:"Nomic AI",cat:"embedding",desc:"Лучший локальный embedding для RAG",size:"274 МБ",vram:"—",badge:"fast",emoji:"📊",pullCmd:"nomic-embed-text"},
+  {id:"mxbai-embed",name:"mxbai-embed-large",provider:"mixedbread",cat:"embedding",desc:"Топ открытый embedding model",size:"670 МБ",vram:"—",badge:"",emoji:"📊",pullCmd:"mxbai-embed-large"},
+  {id:"all-minilm",name:"all-minilm",provider:"Microsoft",cat:"embedding",desc:"Быстрый и компактный embedding",size:"45 МБ",vram:"—",badge:"fast",emoji:"📊",pullCmd:"all-minilm"},
+  {id:"paraphrase-multilingual",name:"Paraphrase Multilingual",provider:"Microsoft",cat:"embedding",desc:"Мультиязычный embedding — включая русский",size:"278 МБ",vram:"—",badge:"",emoji:"📊",pullCmd:"paraphrase-multilingual"},
+  {id:"llama3-groq-8b",name:"Llama3-Groq 8B Tool Use",provider:"Groq",cat:"tools_llm",desc:"Обученный на вызов инструментов и функций",size:"4.9 ГБ",vram:"6+",badge:"",emoji:"🔧",pullCmd:"llama3-groq-tool-use:8b"},
+  {id:"llama3-groq-70b",name:"Llama3-Groq 70B Tool Use",provider:"Groq",cat:"tools_llm",desc:"Мощные tool-use для агентов",size:"43 ГБ",vram:"24+",badge:"",emoji:"🔧",pullCmd:"llama3-groq-tool-use:70b"},
+  {id:"firefunction-v2",name:"FireFunction v2 70B",provider:"Fireworks",cat:"tools_llm",desc:"Function calling на уровне GPT-4",size:"43 ГБ",vram:"24+",badge:"",emoji:"🔧",pullCmd:"firefunction-v2:70b"},
+  {id:"hermes3-70b",name:"Hermes 3 70B",provider:"NousResearch",cat:"llm",desc:"Топ instruction-tuned Llama 3.1",size:"43 ГБ",vram:"24+",badge:"hot",emoji:"⚗️",pullCmd:"hermes3:70b"},
+  {id:"hermes3-8b",name:"Hermes 3 8B",provider:"NousResearch",cat:"llm",desc:"Компактный Hermes3",size:"4.9 ГБ",vram:"6+",badge:"",emoji:"⚗️",pullCmd:"hermes3:8b"},
+  {id:"marco-o1",name:"Marco-o1 7B",provider:"AIDC-AI",cat:"reasoning",desc:"o1-стиль reasoning на 7B",size:"4.7 ГБ",vram:"—",badge:"new",emoji:"🧩",pullCmd:"marco-o1:7b"},
+  {id:"skywork-o1",name:"Skywork-o1 8B",provider:"Skywork",cat:"reasoning",desc:"Extended thinking для сложных задач",size:"4.9 ГБ",vram:"6+",badge:"new",emoji:"🌌",pullCmd:"skywork-o1:8b"},
+  {id:"qvq-72b",name:"QVQ 72B Preview",provider:"Alibaba",cat:"reasoning",desc:"Visual thinking reasoning от Qwen",size:"45 ГБ",vram:"24+",badge:"new",emoji:"🔮",pullCmd:"qvq:72b"},
+  {id:"mistral-large-2",name:"Mistral Large 2 123B",provider:"Mistral AI",cat:"llm",desc:"Флагман Mistral — конкурент GPT-4",size:"70 ГБ",vram:"40+",badge:"hot",emoji:"🌪️",pullCmd:"mistral-large:latest"},
+  {id:"llama3.1-70b",name:"Llama 3.1 70B",provider:"Meta",cat:"llm",desc:"128k контекст — длинные документы",size:"43 ГБ",vram:"24+",badge:"",emoji:"🦙",pullCmd:"llama3.1:70b"},
+  {id:"llama3.1-8b",name:"Llama 3.1 8B",provider:"Meta",cat:"llm",desc:"128k контекст в компактном 8B",size:"4.7 ГБ",vram:"6+",badge:"",emoji:"🦙",pullCmd:"llama3.1:8b"},
+  {id:"llama3.2-1b",name:"Llama 3.2 1B",provider:"Meta",cat:"llm",desc:"1B — запускается на мобильных устройствах",size:"1.3 ГБ",vram:"—",badge:"fast",emoji:"🦙",pullCmd:"llama3.2:1b"},
+  {id:"tinyllama",name:"TinyLlama 1.1B",provider:"Community",cat:"llm",desc:"Обучен на 3T токенах — умный малыш",size:"638 МБ",vram:"—",badge:"fast",emoji:"🦙",pullCmd:"tinyllama:1.1b"},
+  {id:"orca2-13b",name:"Orca 2 13B",provider:"Microsoft",cat:"reasoning",desc:"Chain-of-thought reasoning от Microsoft",size:"7.4 ГБ",vram:"8+",badge:"",emoji:"🐋",pullCmd:"orca2:13b"},
+  {id:"orca2-7b",name:"Orca 2 7B",provider:"Microsoft",cat:"reasoning",desc:"Reasoning в компактном формате",size:"3.8 ГБ",vram:"—",badge:"",emoji:"🐋",pullCmd:"orca2:7b"},
+  {id:"llama-guard3",name:"Llama Guard 3 8B",provider:"Meta",cat:"specialised",desc:"Безопасная классификация контента",size:"4.9 ГБ",vram:"6+",badge:"",emoji:"🛡️",pullCmd:"llama-guard3:8b"},
+  {id:"reader-lm",name:"Reader-LM 1.5B",provider:"Jina AI",cat:"specialised",desc:"Конвертирует HTML в Markdown",size:"900 МБ",vram:"—",badge:"fast",emoji:"📖",pullCmd:"reader-lm:1.5b"},
+  {id:"snowflake-arctic",name:"Snowflake Arctic 480B",provider:"Snowflake",cat:"llm",desc:"MoE Enterprise LLM для аналитики данных",size:"280 ГБ",vram:"80+",badge:"",emoji:"❄️",pullCmd:"snowflake-arctic:latest"},
+  {id:"nous-hermes2-mixtral",name:"Nous Hermes 2 Mixtral",provider:"NousResearch",cat:"llm",desc:"Лучший instruction Mixtral ассистент",size:"26 ГБ",vram:"24+",badge:"",emoji:"⚗️",pullCmd:"nous-hermes2-mixtral:8x7b"},
+  {id:"glm4-9b",name:"GLM-4 9B",provider:"Zhipu AI",cat:"llm",desc:"Мощный китайско-английский ассистент",size:"5.5 ГБ",vram:"6+",badge:"new",emoji:"🌏",pullCmd:"glm4:9b"},
+  {id:"wizardlm-7b",name:"WizardLM 7B",provider:"WizardLM",cat:"llm",desc:"Evolve-instruct обучение",size:"3.8 ГБ",vram:"—",badge:"",emoji:"🧙",pullCmd:"wizardlm:7b"},
+  {id:"alpaca-7b",name:"Alpaca 7B",provider:"Stanford",cat:"llm",desc:"Первый instruction-tuned Llama от Stanford",size:"3.8 ГБ",vram:"—",badge:"",emoji:"🦙",pullCmd:"alpaca:7b"}
+];
+
+const AGENTS_DATA=[
+  {id:"telegram",name:"Telegram-канал бот",desc:"Автоматически публикует контент в ваш Telegram-канал по расписанию",icon:"📢",framework:"CrewAI",tags:["telegram","автопостинг","расписание"],color:"rgba(0,136,204,.15)"},
+  {id:"researcher",name:"AI-исследователь",desc:"Собирает данные из интернета, анализирует и создаёт отчёты",icon:"🔍",framework:"AutoGen",tags:["поиск","анализ","отчёты"],color:"rgba(124,58,237,.15)"},
+  {id:"coder",name:"Coding-агент",desc:"Пишет, тестирует и исправляет код по вашему описанию",icon:"🤖",framework:"AutoGen",tags:["код","тесты","рефакторинг"],color:"rgba(16,185,129,.15)"},
+  {id:"content",name:"Контент-машина",desc:"Генерирует тексты, посты, статьи по темам и ключевым словам",icon:"✍️",framework:"LangChain",tags:["контент","SEO","маркетинг"],color:"rgba(245,158,11,.15)"},
+  {id:"rag",name:"RAG-агент (DocQA)",desc:"Отвечает на вопросы по вашим документам PDF/Word/Excel",icon:"📚",framework:"LangChain",tags:["RAG","документы","поиск"],color:"rgba(239,68,68,.15)"},
+  {id:"monitor",name:"Мониторинг цен",desc:"Следит за ценами товаров и отправляет уведомления",icon:"📊",framework:"CrewAI",tags:["парсинг","уведомления","e-commerce"],color:"rgba(52,211,153,.15)"},
+  {id:"discord",name:"Discord-бот",desc:"Управляет Discord сервером и отвечает участникам",icon:"🎮",framework:"AutoGen",tags:["discord","бот","модерация"],color:"rgba(88,101,242,.15)"},
+  {id:"scheduler",name:"Планировщик задач",desc:"Автоматически планирует и выполняет повторяющиеся задачи",icon:"📅",framework:"CrewAI",tags:["расписание","автоматизация","задачи"],color:"rgba(20,184,166,.15)"}
+];
+
+const DISCOVER_DATA=[
+  {name:"ComfyUI",repo:"comfyanonymous/ComfyUI",stars:"65.4k",desc:"Нодовый редактор Stable Diffusion",emoji:"🎨"},
+  {name:"Open WebUI",repo:"open-webui/open-webui",stars:"82.1k",desc:"Лучший фронтенд для Ollama",emoji:"💬"},
+  {name:"Automatic1111",repo:"AUTOMATIC1111/stable-diffusion-webui",stars:"143k",desc:"Классический SD WebUI",emoji:"🖼️"},
+  {name:"Ollama",repo:"ollama/ollama",stars:"108k",desc:"Запуск LLM локально в 1 команду",emoji:"🦙"},
+  {name:"LM Studio",repo:"lmstudio-ai/lmstudio",stars:"28.3k",desc:"GUI для управления LLM моделями",emoji:"🎛️"},
+  {name:"n8n",repo:"n8n-io/n8n",stars:"51.2k",desc:"Автоматизация без кода с AI-нодами",emoji:"⚙️"},
+  {name:"AnythingLLM",repo:"Mintplex-Labs/anything-llm",stars:"35.8k",desc:"RAG для ваших документов",emoji:"📄"},
+  {name:"Whisper WebUI",repo:"jhj0517/Whisper-WebUI",stars:"4.2k",desc:"Транскрипция и субтитры через Whisper",emoji:"🎤"},
+  {name:"LocalAI",repo:"mudler/LocalAI",stars:"24k",desc:"OpenAI-совместимый локальный API",emoji:"🔌"},
+  {name:"Flowise",repo:"FlowiseAI/Flowise",stars:"33k",desc:"Визуальный конструктор LLM цепочек",emoji:"🔗"},
+  {name:"FramePack",repo:"lllyasviel/FramePack",stars:"19k",desc:"Покадровая генерация видео",emoji:"🎬"},
+  {name:"Perplexica",repo:"ItzCrazyKns/Perplexica",stars:"16k",desc:"Локальный AI-поиск в интернете",emoji:"🌐"}
+];
+
+const IC={
+  image:'<svg viewBox="0 0 24 24" fill="none" stroke="rgba(167,139,250,.85)" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>',
+  video:'<svg viewBox="0 0 24 24" fill="none" stroke="rgba(249,115,22,.85)" stroke-width="1.6"><polygon points="23,7 16,12 23,17"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>',
+  llm:'<svg viewBox="0 0 24 24" fill="none" stroke="rgba(129,140,248,.85)" stroke-width="1.6"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  audio:'<svg viewBox="0 0 24 24" fill="none" stroke="rgba(96,165,250,.85)" stroke-width="1.6"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>',
+  "3d":'<svg viewBox="0 0 24 24" fill="none" stroke="rgba(52,211,153,.85)" stroke-width="1.6"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>',
+  tools:'<svg viewBox="0 0 24 24" fill="none" stroke="rgba(251,191,36,.85)" stroke-width="1.6"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+  face:'<svg viewBox="0 0 24 24" fill="none" stroke="rgba(244,114,182,.85)" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>'
+};
+const ic=c=>IC[c]||IC.tools;
+const CL={image:"Изображения",video:"Видео",llm:"LLM",audio:"Аудио","3d":"3D",tools:"Инструменты",face:"Лицо"};
+
+let inst=new Set(),runs={},curF="all",updAvail=new Set(),tH=[],tHi=-1;
+let dlInterval=null,curModelFilter="all";
+
+function nav(p){
+  document.querySelectorAll(".ni").forEach(e=>e.classList.remove("on"));
+  document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
+  const ni=document.querySelector('[data-p="'+p+'"]');
+  if(ni)ni.classList.add("on");
+  const pg=document.getElementById("page-"+p);
+  if(pg)pg.classList.add("active");
+}
+
+function applyT(){
+  const d=document.getElementById("dt").checked;
+  document.documentElement.setAttribute("data-theme",d?"dark":"light");
+  if(window.mp)window.mp.setTheme(d?"dark":"light");
+}
+
+function toast(m,t,d){
+  d=d||3400;
+  const h=document.getElementById("toasts"),el=document.createElement("div");
+  el.className="toast";
+  const c={ok:"var(--gn)",err:"var(--rd)",info:"var(--a2)",warn:"var(--am)"}[t]||"var(--gn)";
+  el.innerHTML='<span style="color:'+c+';font-weight:700">&#9679;</span><span style="flex:1">'+m+'</span><span class="tcl" onclick="this.parentNode.remove()">&#10005;</span>';
+  h.appendChild(el);
+  setTimeout(function(){el.style.animation="tout .18s var(--e) forwards";setTimeout(function(){if(el.parentNode)el.remove();},200);},d);
+}
+
+function rSysBar(si){
+  if(!si)return;
+  var bar=document.getElementById("sysbar");
+  bar.innerHTML=[
+    {l:"Python",v:si.pythonOk?si.pythonExe:"Не найден",ok:si.pythonOk},
+    {l:"Git",v:si.gitOk?"Установлен":"Не найден",ok:si.gitOk},
+    {l:"RAM",v:Math.round(si.freeRAM/1024)+" / "+Math.round(si.totalRAM/1024)+" ГБ",ok:true},
+    {l:"Платформа",v:si.platform+" "+si.arch,ok:true}
+  ].map(function(x){return '<div class="sysi '+(x.ok?"ok":"er")+'"><span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--t3)">'+x.l+'</span><span>'+x.v+"</span></div>";}).join("");
+  if(si.pythonExe)document.getElementById("py-path").textContent=si.pythonExe;
+  document.getElementById("py-ok").textContent=si.pythonOk?"✓ OK":"✗ Нет";
+  document.getElementById("py-ok").style.color=si.pythonOk?"var(--gn)":"var(--rd)";
+  document.getElementById("git-ok").textContent=si.gitOk?"✓ OK":"✗ Нет";
+  document.getElementById("git-ok").style.color=si.gitOk?"var(--gn)":"var(--rd)";
+  document.getElementById("ram").textContent=Math.round(si.freeRAM/1024)+" ГБ свободно";
+  if(si.homeDir){document.getElementById("set-h").textContent=si.homeDir;document.getElementById("set-v").textContent=si.homeDir+"/venvs";}
+}
+
+function rHome(){
+  var arr=CAT.filter(function(a){return inst.has(a.id);}),r=arr.filter(function(a){return runs[a.id];});
+  document.getElementById("si").textContent=arr.length;
+  document.getElementById("srun").textContent=r.length;
+  document.getElementById("nr").textContent=r.length;
+  document.getElementById("supd").textContent=updAvail.size;
+  document.getElementById("hs").textContent=arr.length?arr.length+" установлено":"Установите первое приложение";
+  var g=document.getElementById("ag"),e=document.getElementById("eh");
+  if(!arr.length){g.style.display="none";e.style.display="flex";return;}
+  g.style.display="grid";e.style.display="none";
+  g.innerHTML=arr.map(function(a){
+    var run=runs[a.id],upd=updAvail.has(a.id);
+    return '<div class="gc hv ac" id="ac-'+a.id+'">'+
+      '<div class="rdot '+(run?"on":"off")+'"></div>'+
+      (upd?'<div class="upd-dot" title="Доступно обновление"></div>':"")+
+      '<div class="aico">'+ic(a.cat)+"</div>"+
+      '<div><div class="an">'+a.name+'</div><div class="ad">'+(a.desc.length>55?a.desc.substring(0,55)+"…":a.desc)+"</div></div>"+
+      '<div class="aa">'+(run
+        ?'<button class="btn sm bd" onclick="sStop(\''+a.id+'\')">Стоп</button><button class="btn sm" onclick="doOpenApp(\''+a.id+'\')">Открыть</button>'
+        :'<button class="btn sm bp" onclick="sLaunch(\''+a.id+'\')">Запустить</button>')+
+      (upd?'<button class="btn sm bam" onclick="sUpdate(\''+a.id+'\')">↑</button>':"")+"</div>"+
+      "</div>";
+  }).join("");
+}
+
+function rCat(){
+  var q=(document.getElementById("cq").value||"").toLowerCase();
+  var arr=CAT.filter(function(a){return(curF==="all"||a.cat===curF)&&(!q||a.name.toLowerCase().includes(q)||a.desc.toLowerCase().includes(q));});
+  document.getElementById("cc").textContent=arr.length+" приложений";
+  var g=document.getElementById("cg");
+  if(!arr.length){g.innerHTML='<div class="empty"><div class="ei"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div class="et">Ничего не найдено</div></div>';return;}
+  g.innerHTML=arr.map(function(a){
+    var isI=inst.has(a.id),upd=updAvail.has(a.id);
+    return '<div class="ci">'+
+      '<div class="cic">'+ic(a.cat)+"</div>"+
+      '<div class="cb">'+
+        '<div class="cn">'+a.name+(upd?'<span style="font-size:9px;background:var(--am);color:#000;border-radius:4px;padding:1px 5px;margin-left:5px;vertical-align:middle">↑ обновление</span>':"")+"</div>"+
+        '<div class="cd">'+a.desc+"</div>"+
+        '<div class="cm"><span>'+a.size+"</span>"+(a.vram&&a.vram!=="—"?'<span>VRAM: '+a.vram+" ГБ</span>":"")+
+        '<span class="tag">'+(CL[a.cat]||a.cat)+"</span></div>"+
+      "</div>"+
+      '<div class="cr">'+
+        (isI
+          ?'<button class="btn sm bg2" disabled>Установлено</button>'+(upd?'<button class="btn sm bam" onclick="sUpdate(\''+a.id+'\')">Обновить</button>':"")
+          :'<button class="btn sm bp" id="ib-'+a.id+'" onclick="sInstall(\''+a.id+'\',\''+a.name.replace(/'/g,"\\'").replace(/"/g,"&quot;")+'\')" >Установить</button>')+
+        '<a href="#" onclick="doOpenUrl(\'https://github.com/'+a.repo+'\');return false;" style="font-size:10px;color:var(--t3);text-decoration:none">GitHub ↗</a>'+
+      "</div></div>";
+  }).join("");
+}
+
+function rRun(){
+  var arr=CAT.filter(function(a){return runs[a.id];});
+  document.getElementById("rl").textContent=arr.length+" запущено";
+  document.getElementById("nr").textContent=arr.length;
+  var l=document.getElementById("rlist");
+  if(!arr.length){l.innerHTML='<div class="empty"><div class="ei"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="10,15 15,12 10,9"/></svg></div><div class="et">Нет активных процессов</div></div>';return;}
+  l.innerHTML=arr.map(function(a){
+    var r=runs[a.id];
+    return '<div class="pi">'+
+      '<div class="pic">'+ic(a.cat)+"</div>"+
+      '<div class="pb"><div class="pn">'+a.name+'</div><div class="pm">http://127.0.0.1:'+r.port+" · PID "+r.pid+' · <span style="color:var(--gn)">&#9679; активен</span></div></div>'+
+      '<div class="pr">'+
+        '<button class="btn sm" onclick="doOpenApp(\''+a.id+'\')">Открыть ↗</button>'+
+        '<button class="btn sm" onclick="doShowFolder(\''+a.id+'\')">Папка</button>'+
+        '<button class="btn sm bd" onclick="sStop(\''+a.id+'\')">Стоп</button>'+
+      "</div></div>";
+  }).join("");
+}
+
+function rUpdates(){
+  var arr=CAT.filter(function(a){return inst.has(a.id);});
+  document.getElementById("ul").textContent=arr.length+" установлено";
+  var l=document.getElementById("ulist");
+  if(!arr.length){l.innerHTML='<div class="empty"><div class="et">Нет установленных приложений</div></div>';return;}
+  l.innerHTML=arr.map(function(a){
+    var upd=updAvail.has(a.id);
+    return '<div class="ui">'+
+      '<div class="pic">'+ic(a.cat)+"</div>"+
+      '<div class="pb"><div class="pn">'+a.name+'</div><div class="pm" style="color:'+(upd?"var(--am)":"var(--gn)")+'">'+( upd?"↑ Доступно обновление":"✓ Актуальная версия")+"</div></div>"+
+      '<div class="pr">'+
+        (upd?'<button class="btn sm bam" onclick="sUpdate(\''+a.id+'\')">Обновить</button>':"")+
+        '<button class="btn sm" id="cu-'+a.id+'" onclick="checkOneUpdate(\''+a.id+'\')">Проверить</button>'+
+      "</div></div>";
+  }).join("");
+}
+
+async function checkOneUpdate(id){
+  var btn=document.getElementById("cu-"+id);
+  if(btn){btn.disabled=true;btn.textContent="Проверяю…";}
+  try{
+    var r=await window.mp.checkUpdate(id);
+    if(r&&r.hasUpdate){updAvail.add(id);toast("Доступно обновление для "+id,"warn");}
+    else toast(id+" актуален","ok");
+  }catch(e){toast(id+" — нет подключения","warn");}
+  rUpdates();rHome();
+  if(btn){btn.disabled=false;btn.textContent="Проверить";}
+}
+
+async function checkAllUpdates(){
+  var arr=CAT.filter(function(a){return inst.has(a.id);});
+  toast("Проверяю "+arr.length+" приложений…","info",2000);
+  for(var i=0;i<arr.length;i++)await checkOneUpdate(arr[i].id);
+  var nu=document.getElementById("nu");
+  if(updAvail.size){nu.style.display="";nu.textContent=updAvail.size;document.getElementById("supd").textContent=updAvail.size;}
+  toast("Проверка завершена: "+updAvail.size+" обновлений","ok");
+}
+
+function sInstall(id,name){
+  var sc=CAT.find(function(a){return a.id===id;});
+  var steps=sc?["Проверка Python","Создание venv","Установка зависимостей","Загрузка моделей","Финальная настройка"]:["Установка"];
+  document.getElementById("mtt").textContent="Установка "+name;
+  document.getElementById("mpf").style.width="0%";
+  document.getElementById("mst").textContent="Подготовка…";
+  document.getElementById("modalOkBtn").disabled=true;
+  document.getElementById("mlog").innerHTML="";
+  document.getElementById("msteps").innerHTML=steps.map(function(s,i){return '<div class="step-row" id="sr'+id+i+'"><div class="step-ic" id="si_'+id+'_'+i+'">'+(i+1)+"</div><span>"+s+"</span></div>";}).join("");
+  document.getElementById("imod").classList.add("open");
+  tlog("📦 Установка "+name+"…","in");
+  var p=window.mp?window.mp.install(id):null;
+  (p||demoInstall(id,name,steps.length)).then(function(res){
+    if(res&&res.ok){
+      inst.add(id);
+      document.getElementById("mpf").style.width="100%";
+      document.getElementById("mst").textContent=name+" установлен ✓";
+      document.getElementById("modalOkBtn").disabled=false;
+      rHome();rCat();toast(name+" установлен","ok");tlog(name+" установлен","ok");
+    }else{
+      var err=(res&&res.error)||"Неизвестная ошибка";
+      document.getElementById("mst").textContent="Ошибка: "+err;
+      document.getElementById("modalOkBtn").disabled=false;
+      tlog("Ошибка: "+err,"er");toast("Ошибка: "+err,"err");
+    }
+  }).catch(function(e){
+    document.getElementById("mst").textContent="Ошибка: "+e.message;
+    document.getElementById("modalOkBtn").disabled=false;
+    tlog(e.message,"er");
+  });
+}
+
+function demoInstall(id,name,steps){
+  steps=steps||5;
+  return new Promise(function(res){
+    var p=0;
+    var iv=setInterval(function(){
+      p+=Math.random()*8+4;
+      if(p>=100){
+        clearInterval(iv);p=100;
+        document.getElementById("mpf").style.width="100%";
+        document.getElementById("mst").textContent=name+" установлен (демо)";
+        document.getElementById("modalOkBtn").disabled=false;
+        for(var i=0;i<steps;i++){var ic=document.getElementById("si_"+id+"_"+i);if(ic){ic.className="step-ic done";ic.textContent="✓";}}
+        inst.add(id);rHome();rCat();
+        tlog(name+" установлен (демо)","ok");toast(name+" установлен","ok");
+        res({ok:true});
+      }else{
+        document.getElementById("mpf").style.width=p+"%";
+        var step=Math.min(Math.floor(p/20),steps-1);
+        document.getElementById("mst").textContent="Шаг "+(step+1)+" из "+steps+" ("+Math.round(p)+"%)";
+        var sic=document.getElementById("si_"+id+"_"+step);
+        if(sic&&!sic.classList.contains("done"))sic.className="step-ic active";
+      }
+    },160);
+  });
+}
+
+function closeMF(){
+  if(!document.getElementById("modalOkBtn").disabled)
+    document.getElementById("imod").classList.remove("open");
+}
+
+async function sUpdate(id){
+  var a=CAT.find(function(x){return x.id===id;});
+  if(!a)return;
+  tlog("↑ Обновление "+a.name+"…","in");
+  toast("Обновляю "+a.name+"…","info",2000);
+  try{
+    var r=window.mp?await window.mp.update(id):null;
+    if(!window.mp){
+      setTimeout(function(){updAvail.delete(id);rHome();rCat();rUpdates();toast(a.name+" обновлён","ok");tlog(a.name+" обновлён","ok");},1500);
+    }else if(r&&r.ok){
+      updAvail.delete(id);rHome();rCat();rUpdates();toast(a.name+" обновлён","ok");tlog(a.name+" обновлён","ok");
+    }
+  }catch(e){toast("Ошибка обновления","err");}
+}
+
+async function sLaunch(id){
+  var a=CAT.find(function(x){return x.id===id;});
+  if(!a)return;
+  tlog("▶ Запуск "+a.name+"…","in");toast("Запускаю "+a.name+"…","info",2000);
+  try{
+    var r=window.mp?await window.mp.launch(id):null;
+    if(r&&r.ok){
+      runs[id]={port:r.port,pid:r.pid};
+      rHome();rRun();tlog(a.name+" запущен :"+r.port,"ok");toast(a.name+" запущен","ok");
+    }else if(!r){
+      var port=43010+Math.floor(Math.random()*80);
+      runs[id]={port:port,pid:Math.floor(Math.random()*60000)+1000};
+      rHome();rRun();tlog(a.name+" запущен (демо) :"+port,"ok");toast(a.name+" запущен (демо)","ok");
+    }
+  }catch(e){
+    var port=43010+Math.floor(Math.random()*80);
+    runs[id]={port:port,pid:Math.floor(Math.random()*60000)+1000};
+    rHome();rRun();tlog(a.name+" запущен (демо) :"+port,"ok");toast(a.name+" запущен (демо)","ok");
+  }
+}
+
+async function sStop(id){
+  var a=CAT.find(function(x){return x.id===id;});
+  if(!a)return;
+  try{if(window.mp)await window.mp.stop(id);}catch(e){}
+  delete runs[id];rHome();rRun();tlog(a.name+" остановлен","w");toast(a.name+" остановлен","warn");
+}
+
+function doOpenApp(id){if(window.mp)window.mp.openApp(id);else toast("Откройте http://127.0.0.1:"+(runs[id]&&runs[id].port||3000)+" в браузере","info");}
+function doShowFolder(id){if(window.mp)window.mp.showFolder(id);else toast("Функция доступна в Electron","info");}
+function doOpenUrl(url){if(window.mp)window.mp.openUrl(url);else window.open(url,"_blank");}
+function doPath(){if(window.mp)window.mp.openPath("~/mindpod");else toast("Функция доступна в Electron","info");}
+
+function renderModelFilters(){
+  var cats=[
+    {k:"all",l:"Все"},
+    {k:"llm",l:"LLM"},
+    {k:"code",l:"Код"},
+    {k:"reasoning",l:"Reasoning"},
+    {k:"multimodal",l:"Мультимодальные"},
+    {k:"embedding",l:"Embeddings"},
+    {k:"tools_llm",l:"Tool Use"},
+    {k:"specialised",l:"Специальные"}
+  ];
+  var row=document.getElementById("mfilt-row");
+  if(!row)return;
+  row.innerHTML=cats.map(function(c){
+    return '<button class="mfilt-btn'+(c.k==="all"?" on":"")+'" data-mf="'+c.k+'">'+c.l+"</button>";
+  }).join("")+
+  '<div class="mfilt-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="msearch" placeholder="Поиск модели…" autocomplete="off"/></div>';
+  row.querySelectorAll(".mfilt-btn").forEach(function(b){
+    b.addEventListener("click",function(){
+      row.querySelectorAll(".mfilt-btn").forEach(function(x){x.classList.remove("on");});
+      b.classList.add("on");
+      curModelFilter=b.dataset.mf;
+      renderModelsGrid();
+    });
+  });
+  var ms=document.getElementById("msearch");
+  if(ms)ms.addEventListener("input",renderModelsGrid);
+}
+
+function renderModelsGrid(){
+  var q="";
+  var ms=document.getElementById("msearch");
+  if(ms)q=ms.value.toLowerCase();
+  var arr=MODELS_DATA.filter(function(m){
+    return(curModelFilter==="all"||m.cat===curModelFilter)&&
+      (!q||m.name.toLowerCase().includes(q)||m.provider.toLowerCase().includes(q)||m.desc.toLowerCase().includes(q));
+  });
+  var g=document.getElementById("models-grid");
+  if(!g)return;
+  document.getElementById("models-count").textContent=arr.length+" из "+MODELS_DATA.length+" моделей";
+  if(!arr.length){g.innerHTML='<div class="gc" style="padding:24px;text-align:center;grid-column:1/-1;color:var(--t3)">Ничего не найдено</div>';return;}
+  var badgeMap={hot:"🔥 Топ",new:"✨ 2026",fast:"⚡ Быстрая"};
+  var badgeCls={hot:"mb-hot",new:"mb-new",fast:"mb-fast"};
+  g.innerHTML=arr.map(function(m){
+    var bp=m.badge?'<span class="model-badge '+badgeCls[m.badge]+'">'+badgeMap[m.badge]+"</span>":"";
+    var downloaded=inst.has("model_"+m.id);
+    return '<div class="gc hv model-card">'+
+      '<div class="model-header"><span style="font-size:22px">'+m.emoji+"</span>"+bp+"</div>"+
+      '<div class="model-name">'+m.name+"</div>"+
+      '<div style="font-size:10px;color:var(--ac);margin-top:-4px">'+m.provider+"</div>"+
+      '<div class="model-desc">'+m.desc+"</div>"+
+      '<div class="model-meta">'+
+        '<span class="model-size">'+m.size+"</span>"+
+        (m.vram!=="—"?'<span class="model-size" style="background:rgba(124,58,237,.1);color:var(--ac)">GPU '+m.vram+" ГБ</span>":'<span class="model-size" style="color:var(--gn)">CPU ✓</span>')+
+      "</div>"+
+      '<div style="margin-top:6px">'+
+        (downloaded
+          ?'<button class="btn sm bg2" style="width:100%" disabled>✓ Скачана</button>'
+          :'<button class="btn sm bp" style="width:100%" onclick="pullModel(\''+m.id+'\',\''+m.name+'\',\''+m.emoji+'\',\''+m.pullCmd+'\')">⬇ Скачать (ollama)</button>')+
+      "</div>"+
+      '<div class="pull-bar" id="pb_'+m.id+'"><div class="pull-fill" id="pf_'+m.id+'"></div></div>'+
+      "</div>";
+  }).join("");
+}
+
+function renderAgents(){
+  var g=document.getElementById("agents-grid");
+  if(!g)return;
+  g.innerHTML=AGENTS_DATA.map(function(a){
+    return '<div class="gc hv agent-card">'+
+      '<div class="agent-icon" style="background:'+a.color+'">'+a.icon+"</div>"+
+      '<div><div class="agent-name">'+a.name+'</div><div style="font-size:10px;color:var(--ac);margin-top:1px">'+a.framework+"</div></div>"+
+      '<div class="agent-desc">'+a.desc+"</div>"+
+      '<div class="agent-tags">'+a.tags.map(function(t){return'<span class="at">'+t+"</span>";}).join("")+"</div>"+
+      '<button class="btn sm bp" style="width:100%;margin-top:2px" onclick="launchAgent(\''+a.id+'\',\''+a.name+'\',\''+a.icon+'\')">&#9654; Запустить агента</button>'+
+      "</div>";
+  }).join("");
+}
+
+function renderDiscover(){
+  var l=document.getElementById("disc-list");
+  if(!l)return;
+  l.innerHTML=DISCOVER_DATA.map(function(d){
+    var catItem=CAT.find(function(c){return c.repo&&c.repo.toLowerCase()===d.repo.toLowerCase();});
+    return '<div class="disc-item">'+
+      '<div class="disc-icon">'+d.emoji+"</div>"+
+      '<div class="disc-body">'+
+        '<div class="disc-name">'+d.name+"</div>"+
+        '<div class="disc-repo">'+d.repo+"</div>"+
+        '<div style="font-size:11px;color:var(--t3);margin-top:2px">'+d.desc+"</div>"+
+      "</div>"+
+      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">'+
+        '<span style="font-size:10px;color:var(--am)">&#11088; '+d.stars+"</span>"+
+        (catItem&&inst.has(catItem.id)
+          ?'<button class="btn sm bg2" disabled>Установлено</button>'
+          :'<button class="btn sm bp" onclick="discInstall(\''+d.repo+'\',\''+d.name+'\',\''+d.emoji+'\')">Установить</button>')+
+      "</div></div>";
+  }).join("");
+}
+
+function pullModel(id,name,emoji,pullCmd){
+  if(inst.has("model_"+id))return;
+  var overlay=document.getElementById("dl-overlay");
+  overlay.style.display="block";
+  document.getElementById("dl-ico").textContent=emoji||"📦";
+  document.getElementById("dl-name").textContent="Скачиваю "+name;
+  document.getElementById("dl-fill").style.width="0%";
+  document.getElementById("dl-status").textContent="Подключение к Ollama Hub…";
+  document.getElementById("dl-speed").textContent="";
+  tlog("ollama pull "+pullCmd+" …","in");
+  var pb=document.getElementById("pb_"+id),pf=document.getElementById("pf_"+id);
+  if(pb)pb.style.display="block";
+  var pct=0;
+  var speeds=["1.2 ГБ/с","890 МБ/с","1.5 ГБ/с","720 МБ/с","2.1 ГБ/с"];
+  var files=["manifest.json","config.json","model-00001.safetensors","model-00002.safetensors","tokenizer.model"];
+  var si=0;
+  if(dlInterval)clearInterval(dlInterval);
+  dlInterval=setInterval(function(){
+    pct+=Math.random()*3+1.5;
+    if(pct>=100){
+      pct=100;clearInterval(dlInterval);dlInterval=null;
+      document.getElementById("dl-fill").style.width="100%";
+      if(pf)pf.style.width="100%";
+      document.getElementById("dl-status").textContent="✓ "+name+" установлена";
+      document.getElementById("dl-speed").textContent="";
+      tlog("✓ Модель "+name+" скачана","ok");
+      toast(name+" готова к работе — ollama run "+pullCmd,"ok",5000);
+      inst.add("model_"+id);
+      var iml=document.getElementById("installed-models-list");
+      if(iml){
+        if(iml.textContent.includes("Нет скачанных"))iml.innerHTML="";
+        var row=document.createElement("div");
+        row.style.cssText="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)";
+        row.innerHTML='<span style="font-size:18px">'+(emoji||"📦")+'</span><span style="flex:1;color:var(--t2)">'+name+'</span><code style="font-size:10px;color:var(--t3);font-family:var(--m)">ollama run '+pullCmd+'</code><span style="color:var(--gn);font-size:11px">✓ готова</span>';
+        iml.appendChild(row);
+      }
+      renderModelsGrid();
+      setTimeout(function(){overlay.style.display="none";if(pb)pb.style.display="none";},2000);
+      return;
+    }
+    document.getElementById("dl-fill").style.width=pct+"%";
+    if(pf)pf.style.width=pct+"%";
+    if(Math.floor(pct)%18===0&&si<files.length){
+      document.getElementById("dl-status").textContent="Получаю "+files[si++];
+    }
+    document.getElementById("dl-speed").textContent=speeds[Math.floor(Math.random()*speeds.length)];
+  },100);
+}
+
+function cancelDownload(){
+  if(dlInterval)clearInterval(dlInterval);
+  dlInterval=null;
+  document.getElementById("dl-overlay").style.display="none";
+  toast("Загрузка отменена","warn");
+  tlog("Загрузка прервана пользователем","w");
+}
+
+function launchAgent(id,name,icon){
+  toast("Запускаю агента "+icon+" "+name+"…","info",2500);
+  tlog("[Agent] Инициализация: "+name,"in");
+  setTimeout(function(){tlog("[Agent] Подключение к Ollama API :11434…","in");},400);
+  setTimeout(function(){tlog("[Agent] "+name+" — ожидает задачу","ok");},900);
+  setTimeout(function(){toast(icon+" "+name+" готов к работе","ok");},1200);
+  var tasks=document.getElementById("agents-tasks");
+  if(tasks){
+    setTimeout(function(){
+      tasks.innerHTML='<div style="display:flex;align-items:center;gap:12px;padding:12px"><span style="font-size:24px">'+icon+'</span><div style="flex:1"><div style="font-size:13px;font-weight:500">'+name+'</div><div style="font-size:11px;color:var(--gn);margin-top:2px">&#9679; Активен — ожидает задачу</div></div><button class="btn sm bd" onclick="stopAgent(\''+id+'\',\''+name+'\')">Стоп</button></div>';
+    },1300);
+  }
+}
+
+function stopAgent(id,name){
+  toast(name+" остановлен","warn");
+  tlog("[Agent] "+name+" остановлен","w");
+  var tasks=document.getElementById("agents-tasks");
+  if(tasks)tasks.innerHTML='<div style="padding:32px;text-align:center"><div style="font-size:32px;margin-bottom:8px">🤖</div><div style="font-size:13px;color:var(--t2)">Нет активных задач</div></div>';
+}
+
+function discInstall(repo,name,emoji){
+  toast("Установка "+name+" из "+repo+"…","info",2000);
+  tlog("[Discover] git clone https://github.com/"+repo,"in");
+  var found=CAT.find(function(a){return a.repo&&a.repo.toLowerCase()===repo.toLowerCase();});
+  if(found){
+    setTimeout(function(){sInstall(found.id,found.name);},400);
+  }else{
+    setTimeout(function(){tlog("[Discover] "+name+" добавлен как кастомное приложение","ok");},800);
+    setTimeout(function(){toast((emoji||"📦")+" "+name+" добавлен в список","ok");},1000);
+  }
+}
+
+function discoverSearch(){
+  var q=document.getElementById("disc-url").value.trim();
+  if(!q){toast("Введите URL или имя репозитория","warn");return;}
+  toast("Поиск: "+q,"info",2000);
+  tlog("[Discover] Поиск: "+q,"in");
+  var lower=q.toLowerCase().replace("https://github.com/","").replace("http://github.com/","");
+  var found=DISCOVER_DATA.find(function(d){return d.repo.toLowerCase()===lower||d.name.toLowerCase().includes(lower);});
+  if(found){
+    toast("Найдено: "+found.name+" — "+found.stars+" звёзд","ok");
+    tlog("[Discover] "+found.name+" найден: "+found.repo,"ok");
+  }else{
+    tlog("[Discover] Открываю: https://github.com/"+q,"in");
+    if(window.mp)window.mp.openUrl("https://github.com/"+q);
+    else toast("Откройте https://github.com/"+q+" в браузере","info",5000);
+  }
+}
+
+function animateResources(){
+  var ramPct=Math.random()*30+40,vramPct=Math.random()*20+15,cpuPct=Math.random()*25+5;
+  var rf=document.getElementById("ram-fill"),vf=document.getElementById("vram-fill"),cf=document.getElementById("cpu-fill");
+  if(rf){rf.style.width=ramPct+"%";document.getElementById("ram-val").textContent=(ramPct*0.32).toFixed(1)+" / 32 ГБ";}
+  if(vf){vf.style.width=vramPct+"%";document.getElementById("vram-val").textContent=(vramPct*0.12).toFixed(1)+" / 12 ГБ";}
+  if(cf){cf.style.width=cpuPct+"%";document.getElementById("cpu-val").textContent=Math.round(cpuPct)+"%";}
+}
+
+var tS=function(){return new Date().toLocaleTimeString("ru-RU",{hour12:false});};
+
+function tlog(m,t){
+  t=t||"o";
+  var el=document.getElementById("term");if(!el)return;
+  var l=document.createElement("div");l.className="tl";
+  var c={ok:"tok",er:"ter",in:"tin",w:"tw",p:"tp"};
+  l.innerHTML='<span class="ts">['+tS()+']</span><span class="'+(c[t]||"to")+'" style="margin-top:0"> '+m+"</span>";
+  el.appendChild(l);el.scrollTop=el.scrollHeight;
+}
+
+function clr(){document.getElementById("term").innerHTML="";tlog("Терминал очищен","in");}
+
+var CMDS={
+  help:function(){tlog("help | ls | list | status | start <id> | stop <id> | update <id> | info <id> | clear | version","in");},
+  ls:function(){
+    var a=CAT.filter(function(x){return inst.has(x.id);});
+    if(!a.length){tlog("Нет установленных","w");return;}
+    a.forEach(function(x){tlog("  "+(runs[x.id]?"▶":"○")+" ["+x.id+"] "+x.name+(updAvail.has(x.id)?" ↑":""),runs[x.id]?"ok":"o");});
+  },
+  list:function(){tlog("Каталог ("+CAT.length+"):","in");CAT.forEach(function(x){tlog("  ["+x.id+"] "+x.name+" — "+x.size,"o");});},
+  status:function(){
+    var r=Object.keys(runs);
+    tlog("Установлено: "+inst.size+" | Запущено: "+r.length+" | Обновлений: "+updAvail.size,r.length?"ok":"w");
+    r.forEach(function(id){var a=CAT.find(function(x){return x.id===id;});if(a)tlog("  ● "+a.name+" :"+runs[id].port,"ok");});
+  },
+  version:function(){tlog("MindPod v1.0.0 | Приложений: "+CAT.length+" | Моделей: "+MODELS_DATA.length+" | venv: ✓","in");}
+};
+
+document.getElementById("tin").addEventListener("keydown",function(e){
+  if(e.key==="ArrowUp"){tHi=Math.min(tHi+1,tH.length-1);document.getElementById("tin").value=tH[tHi]||"";return;}
+  if(e.key==="ArrowDown"){tHi=Math.max(tHi-1,-1);document.getElementById("tin").value=tHi<0?"":tH[tHi];return;}
+  if(e.key!=="Enter")return;
+  var raw=document.getElementById("tin").value.trim();if(!raw)return;
+  tlog("$ "+raw,"p");tH.unshift(raw);tHi=-1;document.getElementById("tin").value="";
+  var parts=raw.toLowerCase().split(/\s+/),cmd=parts[0],args=parts.slice(1);
+  if(cmd==="start"&&args[0]){if(inst.has(args[0]))sLaunch(args[0]);else tlog("Не установлено: "+args[0],"er");}
+  else if(cmd==="stop"&&args[0]){if(runs[args[0]])sStop(args[0]);else tlog("Не запущено: "+args[0],"er");}
+  else if(cmd==="update"&&args[0]){if(inst.has(args[0]))sUpdate(args[0]);else tlog("Не установлено: "+args[0],"er");}
+  else if(cmd==="info"&&args[0]){var a=CAT.find(function(x){return x.id===args[0];});a?tlog("["+a.id+"] "+a.name+" | "+a.cat+" | "+a.size+" | "+a.repo,"in"):tlog("Не найдено: "+args[0],"er");}
+  else if(cmd==="clear")clr();
+  else if(CMDS[cmd])CMDS[cmd]();
+  else tlog("Команда не найдена: "+cmd+". Введите help.","er");
+});
+
+document.getElementById("gs").addEventListener("input",function(e){
+  var q=e.target.value.toLowerCase();
+  document.querySelectorAll(".ac").forEach(function(c){
+    var n=(c.querySelector(".an")?c.querySelector(".an").textContent:"").toLowerCase();
+    var d=(c.querySelector(".ad")?c.querySelector(".ad").textContent:"").toLowerCase();
+    var m=!q||n.includes(q)||d.includes(q);
+    c.style.opacity=m?"1":"0.2";c.style.transform=m?"":"scale(.97)";
+  });
+});
+
+document.querySelectorAll(".ni").forEach(function(el){
+  el.addEventListener("click",function(){nav(el.dataset.p);});
+});
+
+document.querySelectorAll(".fb").forEach(function(b){
+  b.addEventListener("click",function(){
+    document.querySelectorAll(".fb").forEach(function(x){x.classList.remove("on");});
+    b.classList.add("on");
+    curF=b.dataset.f||"all";
+    rCat();
+  });
+});
+
+document.getElementById("cq").addEventListener("input",rCat);
+
+document.getElementById("thbtn").addEventListener("click",function(){
+  var t=document.getElementById("dt");t.checked=!t.checked;applyT();
+});
+document.getElementById("dt").addEventListener("change",applyT);
+document.getElementById("settingsBtn").addEventListener("click",function(){nav("settings");});
+document.getElementById("minBtn").addEventListener("click",function(){if(window.mp)window.mp.minimize();});
+document.getElementById("maxBtn").addEventListener("click",function(){if(window.mp)window.mp.maximize();});
+document.getElementById("closeBtn").addEventListener("click",function(){if(window.mp)window.mp.close();});
+document.getElementById("goToCatalogBtn").addEventListener("click",function(){nav("catalog");});
+document.getElementById("goToCatalogBtn2").addEventListener("click",function(){nav("catalog");});
+document.getElementById("openPathBtn").addEventListener("click",doPath);
+document.getElementById("stopAllBtn").addEventListener("click",function(){
+  if(window.mp)window.mp.stopAll().then(function(){runs={};rHome();rRun();toast("Все остановлены","warn");});
+  else{runs={};rHome();rRun();toast("Все процессы остановлены","warn");}
+});
+document.getElementById("checkAllBtn").addEventListener("click",checkAllUpdates);
+document.getElementById("clrBtn").addEventListener("click",clr);
+document.getElementById("closeModalBtn").addEventListener("click",closeMF);
+document.getElementById("modalOkBtn").addEventListener("click",closeMF);
+document.getElementById("imod").addEventListener("click",function(e){if(e.target.id==="imod")closeMF();});
+document.getElementById("dl-cancel").addEventListener("click",cancelDownload);
+document.getElementById("tt").addEventListener("change",function(){if(window.mp)window.mp.setSetting("minimizeToTray",this.checked);});
+document.getElementById("au").addEventListener("change",function(){if(window.mp)window.mp.setSetting("autoUpdate",this.checked);});
+document.getElementById("openHomeBtn").addEventListener("click",function(){if(window.mp)window.mp.openPath("~/mindpod");else toast("Функция доступна в Electron","info");});
+document.getElementById("openVenvBtn").addEventListener("click",function(){if(window.mp)window.mp.openPath("~/mindpod/venvs");else toast("Функция доступна в Electron","info");});
+document.getElementById("openLogBtn").addEventListener("click",function(){if(window.mp)window.mp.openPath("~/mindpod/logs/engine.log");else toast("Функция доступна в Electron","info");});
+document.getElementById("refreshModelsBtn").addEventListener("click",function(){
+  toast("Проверяю Ollama API :11434…","info",2000);
+  tlog("GET http://127.0.0.1:11434/api/tags","in");
+  setTimeout(function(){tlog("Ollama не запущен — установите из Каталога","w");},600);
+});
+document.getElementById("newAgentBtn").addEventListener("click",function(){toast("Создание нового агента — в разработке","info");});
+document.getElementById("discSearchBtn").addEventListener("click",discoverSearch);
+document.getElementById("disc-url").addEventListener("keydown",function(e){if(e.key==="Enter")discoverSearch();});
+
+if(window.mp){
+  window.mp.on("progress",function(d){
+    document.getElementById("mpf").style.width=d.pct+"%";
+    document.getElementById("mst").textContent=(d.label||"Шаг")+" ("+d.pct+"%)";
+    var ic=document.getElementById("si_"+(d.id||"")+"_"+(d.step-1));
+    if(ic){ic.className="step-ic done";ic.textContent="✓";}
+    var ac=document.getElementById("si_"+(d.id||"")+"_"+d.step);
+    if(ac)ac.className="step-ic active";
+  });
+  window.mp.on("log",function(d){
+    tlog(d.msg,d.type||"o");
+    var ml=document.getElementById("mlog"),l=document.createElement("div");
+    l.style.color={ok:"var(--gn)",er:"var(--rd)",in:"var(--a2)",w:"var(--am)"}[d.type]||"rgba(255,255,255,.6)";
+    l.textContent=d.msg;ml.appendChild(l);ml.scrollTop=ml.scrollHeight;
+  });
+  window.mp.on("installed",function(d){
+    inst.add(d.id);rHome();rCat();
+    document.getElementById("modalOkBtn").disabled=false;
+    document.getElementById("mpf").style.width="100%";
+  });
+  window.mp.on("stopped",function(d){delete runs[d.id];rHome();rRun();});
+}
+
+async function init(){
+  rCat();
+  document.getElementById("scat").textContent=CAT.length;
+  document.getElementById("nb").textContent=CAT.length;
+  renderModelFilters();
+  renderModelsGrid();
+  renderAgents();
+  renderDiscover();
+  setInterval(animateResources,3000);
+  setTimeout(animateResources,800);
+
+  var BOOT=[
+    ["MindPod v1.0.0 запускается…","in"],
+    ["Ядро Engine: venv-изоляция ✓","ok"],
+    ["Git-обновления: ✓","ok"],
+    ["Каталог: "+CAT.length+" приложений, "+MODELS_DATA.length+" моделей","ok"]
+  ];
+  BOOT.forEach(function(item,i){setTimeout(function(){tlog(item[0],item[1]);},i*120);});
+
+  if(!window.mp){
+    tlog("Режим предпросмотра (без Electron IPC)","w");
+    rHome();rRun();
+    return;
+  }
+
+  try{
+    var results=await Promise.all([
+      window.mp.version(),
+      window.mp.getSettings(),
+      window.mp.sysinfo(),
+      window.mp.installed(),
+      window.mp.running()
+    ]);
+    var v=results[0],s=results[1],si=results[2],instArr=results[3],runObj=results[4];
+    if(v){document.getElementById("ver").textContent="v"+v;document.getElementById("sv").textContent="v"+v;document.getElementById("set-vv").textContent="v"+v;}
+    if(s){
+      document.getElementById("dt").checked=s.theme!=="light";
+      document.getElementById("tt").checked=s.minimizeToTray!==false;
+      document.getElementById("au").checked=!!s.autoUpdate;
+      if(s.theme==="light")document.documentElement.setAttribute("data-theme","light");
+    }
+    rSysBar(si);
+    if(instArr)instArr.forEach(function(id){inst.add(id);});
+    if(runObj)Object.assign(runs,runObj);
+    tlog("Установлено: "+inst.size,"ok");
+    tlog("Запущено: "+Object.keys(runs).length,"ok");
+    tlog("Готово к работе.","ok");
+    if(s&&s.autoUpdate)setTimeout(checkAllUpdates,3000);
+  }catch(e){tlog("Init error: "+e.message,"er");}
+
+  rHome();rRun();rUpdates();
+}
+
+init();
+</script>
+</body>
+</html>

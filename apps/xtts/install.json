@@ -1,0 +1,22 @@
+{
+  "id": "xtts",
+  "name": "XTTS (Coqui TTS)",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "pip",
+      "name": "Установить Coqui TTS",
+      "packages": "TTS"
+    },
+    {
+      "method": "git",
+      "name": "Клонировать WebUI",
+      "url": "https://github.com/cocktailpeanutlabs/xtts"
+    },
+    {
+      "method": "npm",
+      "name": "Установить Node.js зависимости",
+      "command": "npm install"
+    }
+  ]
+}

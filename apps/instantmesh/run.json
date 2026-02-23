@@ -1,0 +1,7 @@
+{
+  "id": "instantmesh",
+  "name": "InstantMesh",
+  "port": 7922,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

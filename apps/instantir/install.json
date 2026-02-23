@@ -1,0 +1,17 @@
+{
+  "id": "instantir",
+  "name": "InstantIR",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать InstantIR",
+      "url": "https://github.com/JY-Joy/InstantIR"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

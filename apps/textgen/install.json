@@ -1,0 +1,17 @@
+{
+  "id": "textgen",
+  "name": "Text Generation WebUI",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Text Gen WebUI",
+      "url": "https://github.com/oobabooga/text-generation-webui"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

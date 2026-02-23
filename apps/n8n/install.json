@@ -1,0 +1,12 @@
+{
+  "id": "n8n",
+  "name": "n8n",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "npm",
+      "name": "Установить n8n глобально",
+      "command": "npm install -g n8n"
+    }
+  ]
+}

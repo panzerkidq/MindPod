@@ -1,0 +1,7 @@
+{
+  "id": "fishspeech",
+  "name": "Fish Speech (OpenAudio)",
+  "port": 7905,
+  "command": "{python} -m tools.api_server --port {port}",
+  "env": {}
+}

@@ -1,0 +1,7 @@
+{
+  "id": "bark",
+  "name": "Bark TTS",
+  "port": 7899,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

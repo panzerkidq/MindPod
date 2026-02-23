@@ -1,0 +1,17 @@
+{
+  "id": "liveportrait",
+  "name": "LivePortrait",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать LivePortrait",
+      "url": "https://github.com/KwaiVGI/LivePortrait"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

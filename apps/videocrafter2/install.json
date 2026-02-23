@@ -1,0 +1,17 @@
+{
+  "id": "videocrafter2",
+  "name": "VideoCrafter2",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать VideoCrafter2",
+      "url": "https://github.com/AILab-CVC/VideoCrafter"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

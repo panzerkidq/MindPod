@@ -1,0 +1,22 @@
+{
+  "id": "whisper",
+  "name": "Whisper WebUI",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "pip",
+      "name": "Установить Whisper",
+      "packages": "openai-whisper"
+    },
+    {
+      "method": "git",
+      "name": "Клонировать WebUI",
+      "url": "https://github.com/pinokiofactory/whisper-webui"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

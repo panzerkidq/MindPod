@@ -1,0 +1,17 @@
+{
+  "id": "trellis",
+  "name": "TRELLIS 3D",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать TRELLIS",
+      "url": "https://github.com/microsoft/TRELLIS"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

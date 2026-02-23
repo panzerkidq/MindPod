@@ -1,0 +1,17 @@
+{
+  "id": "brushnet",
+  "name": "BrushNet",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать BrushNet",
+      "url": "https://github.com/TencentARC/BrushNet"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

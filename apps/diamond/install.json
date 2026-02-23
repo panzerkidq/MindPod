@@ -1,0 +1,17 @@
+{
+  "id": "diamond",
+  "name": "Diamond",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Diamond",
+      "url": "https://github.com/eloialonso/diamond"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

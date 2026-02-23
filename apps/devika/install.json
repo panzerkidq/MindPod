@@ -1,0 +1,17 @@
+{
+  "id": "devika",
+  "name": "Devika",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Devika",
+      "url": "https://github.com/stitionai/devika"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

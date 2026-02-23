@@ -1,0 +1,22 @@
+{
+  "id": "comfyui",
+  "name": "ComfyUI",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать ComfyUI",
+      "url": "https://github.com/comfyanonymous/ComfyUI"
+    },
+    {
+      "method": "pip",
+      "name": "Установить PyTorch (CUDA)",
+      "packages": "torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

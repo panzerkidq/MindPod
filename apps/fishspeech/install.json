@@ -1,0 +1,17 @@
+{
+  "id": "fishspeech",
+  "name": "Fish Speech (OpenAudio)",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Fish Speech",
+      "url": "https://github.com/fishaudio/fish-speech"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

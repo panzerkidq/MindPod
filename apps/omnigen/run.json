@@ -1,0 +1,7 @@
+{
+  "id": "omnigen",
+  "name": "OmniGen",
+  "port": 7872,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

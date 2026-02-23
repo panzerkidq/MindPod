@@ -1,0 +1,17 @@
+{
+  "id": "cogstudio",
+  "name": "CogStudio",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать CogStudio",
+      "url": "https://github.com/pinokiofactory/cogstudio"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements.txt"
+    }
+  ]
+}

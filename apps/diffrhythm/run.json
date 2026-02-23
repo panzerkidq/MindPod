@@ -1,0 +1,7 @@
+{
+  "id": "diffrhythm",
+  "name": "DiffRhythm",
+  "port": 7874,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

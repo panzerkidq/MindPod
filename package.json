@@ -1,0 +1,63 @@
+{
+  "name": "mindpod",
+  "version": "1.0.0",
+  "description": "MindPod — персональный лаунчер локальных AI-приложений",
+  "main": "main.js",
+  "author": "MindPod Team",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev":   "electron . --dev",
+    "build": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
+    "build:linux": "electron-builder --linux"
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "build": {
+    "appId": "com.mindpod.app",
+    "productName": "MindPod",
+    "copyright": "Copyright © 2025 MindPod",
+    "directories": { "output": "dist" },
+    "protocols": [{ "name": "mindpod", "schemes": ["mindpod"] }],
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "shortcutName": "MindPod",
+      "installerLanguages": ["Russian", "English"],
+      "language": "1049",
+      "installerHeaderIcon": "assets/icon.ico"
+    },
+    "win": {
+      "target": [
+        { "target": "nsis",     "arch": ["x64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ],
+      "icon": "assets/icon.ico",
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.developer-tools"
+    },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "icon": "assets/icon.png",
+      "category": "Development"
+    },
+    "extraResources": [
+      { "from": "apps/",        "to": "apps/" },
+      { "from": "src/catalog.json", "to": "catalog.json" },
+      { "from": "src/runtime/", "to": "runtime/" }
+    ],
+    "asarUnpack": ["apps/**/*", "runtime/**/*"]
+  }
+}

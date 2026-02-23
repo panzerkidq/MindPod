@@ -1,0 +1,17 @@
+{
+  "id": "svd",
+  "name": "Stable Video Diffusion",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать SVD",
+      "url": "https://github.com/Stability-AI/generative-models"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements/pt2.txt"
+    }
+  ]
+}

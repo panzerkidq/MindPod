@@ -1,0 +1,7 @@
+{
+  "id": "rvc",
+  "name": "RVC",
+  "port": 7897,
+  "command": "{python} infer-web.py --port {port}",
+  "env": {}
+}

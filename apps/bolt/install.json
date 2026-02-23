@@ -1,0 +1,17 @@
+{
+  "id": "bolt",
+  "name": "Bolt.diy",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать Bolt",
+      "url": "https://github.com/stackblitz-labs/bolt.diy"
+    },
+    {
+      "method": "npm",
+      "name": "Установить зависимости",
+      "command": "npm install"
+    }
+  ]
+}

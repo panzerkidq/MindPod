@@ -1,0 +1,7 @@
+{
+  "id": "framepack",
+  "name": "FramePack",
+  "port": 7882,
+  "command": "{python} demo_gradio.py --port {port}",
+  "env": {}
+}

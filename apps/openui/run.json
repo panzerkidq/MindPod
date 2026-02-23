@@ -1,0 +1,7 @@
+{
+  "id": "openui",
+  "name": "OpenUI",
+  "port": 7878,
+  "command": "{python} -m openui --port {port}",
+  "env": {}
+}

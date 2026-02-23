@@ -1,0 +1,17 @@
+{
+  "id": "a1111",
+  "name": "Automatic 1111",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "git",
+      "name": "Клонировать A1111",
+      "url": "https://github.com/AUTOMATIC1111/stable-diffusion-webui"
+    },
+    {
+      "method": "pip",
+      "name": "Установить зависимости",
+      "packages": "-r requirements_versions.txt"
+    }
+  ]
+}

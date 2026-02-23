@@ -1,0 +1,7 @@
+{
+  "id": "facefusion",
+  "name": "FaceFusion",
+  "port": 7895,
+  "command": "{python} facefusion.py run --port {port}",
+  "env": {}
+}

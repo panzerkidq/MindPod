@@ -1,0 +1,7 @@
+{
+  "id": "rmbg2",
+  "name": "RMBG-2 Studio",
+  "port": 7867,
+  "command": "{python} app.py --port {port}",
+  "env": {}
+}

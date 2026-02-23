@@ -1,0 +1,22 @@
+{
+  "id": "ollama",
+  "name": "Ollama",
+  "version": "1.0",
+  "run": [
+    {
+      "method": "shell",
+      "name": "Скачать Ollama Setup",
+      "command": "curl -L https://ollama.com/download/OllamaSetup.exe -o OllamaSetup.exe"
+    },
+    {
+      "method": "shell",
+      "name": "Установить Ollama (тихо)",
+      "command": "OllamaSetup.exe /S"
+    },
+    {
+      "method": "shell",
+      "name": "Скачать модель llama3.2 3B",
+      "command": "ollama pull llama3.2"
+    }
+  ]
+}
