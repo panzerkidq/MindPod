@@ -43,15 +43,6 @@ MindPod/
     └── ...
 ```
 
-## Публикация на GitHub
-
-```bash
-git init
-git add .
-git commit -m "MindPod v1.0"
-git remote add origin https://github.com/YOUR_USERNAME/mindpod.git
-git push -u origin main
-```
 
 ## Лицензия
 
